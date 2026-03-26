@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(taskkill /PID 5940 /F)",
+      "Bash(cmd //c \"taskkill /PID 5940 /F\")",
+      "Bash(ls /c/Users/jacob/Documents/PermitPing/node_modules/.bin/next*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)"
+    ]
+  }
+}
