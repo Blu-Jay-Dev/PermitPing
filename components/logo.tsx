@@ -104,8 +104,8 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
       className={className}
       style={{ display: "block", overflow: "visible" }}
     >
-      {/* Amber squircle badge */}
-      <rect x="4" y="3" width="104" height="62" rx="14" fill="#f59e0b" />
+      {/* Amber squircle badge — #fbbf24 = Tailwind amber-400, matches site buttons */}
+      <rect x="4" y="3" width="104" height="62" rx="14" fill="#fbbf24" />
 
       {/* Jockey illustration — black on amber */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
@@ -152,8 +152,8 @@ export function LogoIcon({ size = 40, className = "" }: LogoIconProps) {
       className={className}
       style={{ display: "block" }}
     >
-      {/* Amber squircle background — rx=115 is 22.5% of 512, matching iOS icon ratio */}
-      <rect x="0" y="0" width="512" height="512" rx="115" fill="#f59e0b" />
+      {/* Amber squircle background — #fbbf24 = Tailwind amber-400, matches site buttons */}
+      <rect x="0" y="0" width="512" height="512" rx="115" fill="#fbbf24" />
 
       {/* Jockey illustration — black on amber for maximum contrast */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
