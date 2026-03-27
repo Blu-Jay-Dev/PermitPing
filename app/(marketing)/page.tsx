@@ -223,7 +223,7 @@ export default function LandingPage() {
               </div>
 
               {/* Headline */}
-              <h1 className="text-[2.75rem] lg:text-[4.5rem] font-black text-stone-900 leading-[1.05] tracking-tight">
+              <h1 className="text-[2.75rem] lg:text-[3.5rem] font-black text-stone-900 leading-[1.05] tracking-tight">
                 Permit expired.<br />
                 <span className="text-red-500">$800 re-pull fee.</span><br />
                 Never again.
