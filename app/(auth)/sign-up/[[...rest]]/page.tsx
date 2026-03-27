@@ -3,8 +3,6 @@
 import { SignUp } from "@clerk/nextjs"
 import { Logo } from "@/components/logo"
 
-// "use client" keeps Clerk's <SignUp /> fully in the browser context.
-// See sign-in page for explanation.
 export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
@@ -12,7 +10,12 @@ export default function SignUpPage() {
         <Logo height={32} />
         <p className="text-gray-600 text-sm">14-day free trial · No credit card required</p>
       </div>
-      <SignUp forceRedirectUrl="/onboarding" />
+      <SignUp
+        routing="path"
+        path="/sign-up"
+        forceRedirectUrl="/onboarding"
+        signInUrl="/sign-in"
+      />
     </div>
   )
 }
