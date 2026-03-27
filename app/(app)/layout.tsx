@@ -3,7 +3,6 @@ import { redirect } from "next/navigation"
 import { createServiceClient } from "@/lib/supabase/server"
 import BottomNav from "@/components/bottom-nav"
 import TrialBanner from "@/components/trial-banner"
-import SubscriptionGate from "@/components/subscription-gate"
 
 export default async function AppLayout({
   children,

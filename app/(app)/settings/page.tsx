@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import { createServiceClient } from "@/lib/supabase/server"
-import { UserButton } from "@clerk/nextjs"
+import UserButtonWrapper from "@/components/user-button-wrapper"
 import type { Contractor } from "@/lib/supabase/types"
 
 export default async function SettingsPage() {
@@ -49,7 +49,7 @@ export default async function SettingsPage() {
         <section className="bg-white rounded-xl p-4 space-y-3">
           <h2 className="font-semibold text-gray-900 text-base">Profile</h2>
           <div className="flex items-center gap-3">
-            <UserButton />
+            <UserButtonWrapper />
             <div className="text-base text-gray-600">
               <p>{contractor.email}</p>
               {contractor.company_name && (
