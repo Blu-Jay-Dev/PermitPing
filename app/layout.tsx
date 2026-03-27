@@ -44,8 +44,6 @@ export default function RootLayout({
     <ClerkProvider
       signInUrl="/sign-in"
       signUpUrl="/sign-up"
-      afterSignInUrl="/dashboard"
-      afterSignUpUrl="/onboarding"
     >
       <html lang="en">
         <body className={inter.className}>
