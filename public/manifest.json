@@ -1,6 +1,6 @@
 {
-  "name": "PermitPing",
-  "short_name": "PermitPing",
+  "name": "PermitJockey",
+  "short_name": "PermitJockey",
   "description": "Track open permits and get SMS reminders before inspection windows close.",
   "start_url": "/dashboard",
   "display": "standalone",

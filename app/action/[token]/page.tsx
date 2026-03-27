@@ -51,7 +51,7 @@ export default async function ActionPage({
           href="/dashboard"
           className="mt-6 text-blue-600 font-medium"
         >
-          Open PermitPing →
+          Open PermitJockey →
         </Link>
       </div>
     )
@@ -69,7 +69,7 @@ export default async function ActionPage({
             href="/dashboard"
             className="block w-full bg-blue-600 text-white font-semibold py-4 px-6 rounded-xl hover:bg-blue-700 transition-colors text-center"
           >
-            Open PermitPing
+            Open PermitJockey
           </Link>
           <p className="text-sm text-gray-500">
             We&apos;ll keep tracking this permit and remind you when needed.

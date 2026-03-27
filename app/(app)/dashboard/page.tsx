@@ -46,7 +46,7 @@ export default async function DashboardPage() {
       {/* Sticky header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3">
         <div className="flex items-center justify-between">
-          <span className="font-bold text-lg text-blue-600">PermitPing</span>
+          <span className="font-bold text-lg text-blue-600">PermitJockey</span>
           <Link
             href="/permits/new"
             className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors"

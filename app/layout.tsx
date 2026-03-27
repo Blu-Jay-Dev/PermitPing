@@ -7,14 +7,14 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "PermitPing — Stop forgetting open permits",
+  title: "PermitJockey — Stop forgetting open permits",
   description:
     "Get SMS + email reminders before inspection windows close and permits expire. Built for electricians, HVAC, plumbers, and GCs.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "PermitPing",
+    title: "PermitJockey",
   },
 }
 

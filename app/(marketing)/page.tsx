@@ -39,7 +39,7 @@ function useCountUp(target: number, duration = 1400) {
 // ─── SMS typing animation ────────────────────────────────────────────────────
 const SMS_MESSAGES = [
   { from: "pp", text: "⚠️ Rough-in overdue — 123 Oak Ave (#E-2411). Permit expires Jun 14." },
-  { from: "pp", text: "Mark called: permitping.com/a/x7k2m" },
+  { from: "pp", text: "Mark called: permitjockey.com/a/x7k2m" },
   { from: "user", text: "Called ✓" },
   { from: "pp", text: "Got it — updated. Rough-in pending. 🟡" },
 ]
@@ -80,7 +80,7 @@ function SmsThread() {
         </div>
         <div className="px-3 pb-5 space-y-2 min-h-[200px]">
           <div className="text-center text-stone-500 text-[10px] py-1">
-            PermitPing · Today 7:04 AM
+            PermitJockey · Today 7:04 AM
           </div>
           {SMS_MESSAGES.map((msg, i) => (
             <div
@@ -91,7 +91,7 @@ function SmsThread() {
             >
               {msg.from === "pp" ? (
                 <div className="bg-blue-600 rounded-2xl rounded-tl-sm px-3 py-2 max-w-[85%]">
-                  <p className={`text-xs leading-relaxed ${msg.text.includes("permitping") ? "text-blue-200 underline" : "text-white"}`}>
+                  <p className={`text-xs leading-relaxed ${msg.text.includes("permitjockey") ? "text-blue-200 underline" : "text-white"}`}>
                     {msg.text}
                   </p>
                 </div>
@@ -193,7 +193,7 @@ export default function LandingPage() {
             <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center">
               <div className="w-2.5 h-2.5 rounded-full bg-white" />
             </div>
-            <span className="font-bold text-stone-900 text-lg tracking-tight">PermitPing</span>
+            <span className="font-bold text-stone-900 text-lg tracking-tight">PermitJockey</span>
           </div>
           <div className="flex items-center gap-6">
             {/* Desktop nav links */}
@@ -234,7 +234,7 @@ export default function LandingPage() {
               </h1>
 
               <p className="text-stone-500 text-base lg:text-lg leading-relaxed max-w-md">
-                PermitPing texts you before rough-in windows close, finals go overdue,
+                PermitJockey texts you before rough-in windows close, finals go overdue,
                 and permits expire. One tap confirms. No login, no app, no hassle.
               </p>
 
@@ -456,7 +456,7 @@ export default function LandingPage() {
               <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-white" />
               </div>
-              <span className="font-bold text-stone-700 text-sm">PermitPing</span>
+              <span className="font-bold text-stone-700 text-sm">PermitJockey</span>
             </div>
 
             {/* Trades */}
@@ -465,7 +465,7 @@ export default function LandingPage() {
             </p>
 
             {/* Legal */}
-            <p className="text-xs text-stone-300">© 2026 PermitPing. All rights reserved.</p>
+            <p className="text-xs text-stone-300">© 2026 PermitJockey. All rights reserved.</p>
           </div>
         </div>
       </footer>
