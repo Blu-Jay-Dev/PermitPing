@@ -9,7 +9,7 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")! // Bypasses RLS
 )
 
-const APP_URL = Deno.env.get("APP_URL") ?? "https://permitping.com"
+const APP_URL = Deno.env.get("APP_URL") ?? "https://permitjockey.com"
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")!
 const TWILIO_ACCOUNT_SID = Deno.env.get("TWILIO_ACCOUNT_SID")!
 const TWILIO_AUTH_TOKEN = Deno.env.get("TWILIO_AUTH_TOKEN")!
@@ -155,32 +155,32 @@ function buildMessage(
     rough_in_due: {
       subject: `Rough-in inspection reminder — ${address}`,
       body: `Your ${permit.trade_type} permit (#${permitNum}) at ${address} was issued ${daysBetween(new Date(permit.issued_date), new Date())} days ago. Have you called for a rough-in inspection yet?\n\nMark it done: ${actionUrl}`,
-      sms: `PermitPing: Rough-in for ${address} (#${permitNum}) — called yet? Exp ${expDate}. Update: ${actionUrl}`,
+      sms: `PermitJockey: Rough-in for ${address} (#${permitNum}) — called yet? Exp ${expDate}. Update: ${actionUrl}`,
     },
     rough_in_overdue: {
       subject: `⚠️ Rough-in overdue — ${address}`,
       body: `Your rough-in inspection at ${address} is overdue. Permit expires ${expDate}.\n\nMark called: ${actionUrl}`,
-      sms: `⚠️ PermitPing: Rough-in OVERDUE at ${address}. Exp ${expDate}. Mark called: ${actionUrl}`,
+      sms: `⚠️ PermitJockey: Rough-in OVERDUE at ${address}. Exp ${expDate}. Mark called: ${actionUrl}`,
     },
     expiration_30day: {
       subject: `Permit expires in 30 days — ${address}`,
       body: `Your ${permit.trade_type} permit (#${permitNum}) at ${address} expires on ${expDate}. Make sure all inspections are scheduled.\n\nView permit: ${actionUrl}`,
-      sms: `PermitPing: Permit at ${address} expires ${expDate} (30 days). Schedule inspections: ${actionUrl}`,
+      sms: `PermitJockey: Permit at ${address} expires ${expDate} (30 days). Schedule inspections: ${actionUrl}`,
     },
     expiration_7day: {
       subject: `⚠️ Permit expires in 7 days — ${address}`,
       body: `URGENT: Your permit at ${address} expires ${expDate}. ${!permit.final_called_at ? "Final inspection has not been called." : ""}\n\nTake action: ${actionUrl}`,
-      sms: `⚠️ PermitPing: Permit at ${address} expires in 7 DAYS (${expDate}). Act now: ${actionUrl}`,
+      sms: `⚠️ PermitJockey: Permit at ${address} expires in 7 DAYS (${expDate}). Act now: ${actionUrl}`,
     },
     expiration_1day: {
       subject: `🚨 Permit expires TOMORROW — ${address}`,
       body: `Your permit at ${address} expires TOMORROW (${expDate}). Contact your building department immediately.\n\nView: ${actionUrl}`,
-      sms: `🚨 PermitPing: Permit at ${address} expires TOMORROW (${expDate}). Call your building dept NOW.`,
+      sms: `🚨 PermitJockey: Permit at ${address} expires TOMORROW (${expDate}). Call your building dept NOW.`,
     },
     final_overdue: {
       subject: `Final inspection not called — ${address}`,
       body: `Your rough-in passed at ${address} but no final inspection has been called. Permit expires ${expDate}.\n\nMark final called: ${actionUrl}`,
-      sms: `PermitPing: Final inspection not called at ${address}. Exp ${expDate}. Mark done: ${actionUrl}`,
+      sms: `PermitJockey: Final inspection not called at ${address}. Exp ${expDate}. Mark done: ${actionUrl}`,
     },
   }
 
@@ -196,7 +196,7 @@ async function sendEmail(to: string, subject: string, text: string) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "PermitPing <reminders@permitping.com>",
+        from: "PermitJockey <reminders@permitjockey.com>",
         to,
         subject,
         text,

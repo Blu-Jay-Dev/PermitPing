@@ -69,7 +69,7 @@ export default function OnboardingPage() {
       <div className="max-w-md mx-auto space-y-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Welcome to PermitPing
+            Welcome to PermitJockey
           </h1>
           <p className="text-gray-600 mt-1">
             Let&apos;s set up your account so we can send the right reminders.

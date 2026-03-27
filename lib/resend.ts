@@ -14,7 +14,7 @@ export async function sendEmail({
   text?: string
 }) {
   return resend.emails.send({
-    from: "PermitPing <reminders@permitping.com>",
+    from: "PermitJockey <reminders@permitjockey.com>",
     to,
     subject,
     html: html ?? `<p>${text}</p>`,

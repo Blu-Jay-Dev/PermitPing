@@ -108,7 +108,7 @@ export default async function SettingsPage() {
           <h2 className="font-semibold text-gray-900 text-base">Billing</h2>
           <div className="text-sm text-gray-700">
             <p className="font-medium">
-              PermitPing —{" "}
+              PermitJockey —{" "}
               {contractor.subscription_status === "trialing"
                 ? "Free Trial"
                 : contractor.subscription_status === "active"
