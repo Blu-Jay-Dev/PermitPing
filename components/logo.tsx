@@ -88,16 +88,16 @@ interface LogoProps {
 export function Logo({ white = false, className = "", height = 32 }: LogoProps) {
   const fg = white ? "white" : "#1c1917"
   // Mark: source paths live in viewBox 200 100 900 480.
-  // At scale=0.19 the horse spans ~76px tall and ~145px wide.
-  // markY=-13 centres the 76px figure in the 68px-tall canvas.
-  // markX=5 leaves a small left margin.
-  const markScale = 0.19
+  // Horse y spans 147→548 = 401 units. Max fitting scale = 68/401 ≈ 0.170.
+  // scale=0.165 gives 66px tall with ~1px breathing room each side.
+  // markY=-7 centres the figure: top lands at ~0.8px, bottom at ~67px.
+  const markScale = 0.165
   const markX = 5
-  const markY = -13
+  const markY = -7
 
   return (
     <svg
-      viewBox="0 0 440 68"
+      viewBox="0 0 420 68"
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
 
       {/* Wordmark */}
       <text
-        x="175"
+        x="158"
         y="49"
         fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
         fontSize="36"
