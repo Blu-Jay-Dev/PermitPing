@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 import { createServiceClient } from "@/lib/supabase/server"
+import { calculateRoughInDueDate } from "@/lib/utils"
 
 // POST /api/permits — create a new permit
 export async function POST(req: Request) {
@@ -60,6 +61,14 @@ export async function POST(req: Request) {
     resolvedJobId = newJob.id
   }
 
+  // Calculate rough-in due date based on trade type (only if rough-in is required)
+  const roughInRequired = rough_in_required ?? true
+  const roughInDueDate = roughInRequired
+    ? calculateRoughInDueDate(new Date(issued_date), trade_type)
+        .toISOString()
+        .split("T")[0]
+    : null
+
   const { data: permit, error: permitError } = await supabase
     .from("permits")
     .insert({
@@ -69,7 +78,8 @@ export async function POST(req: Request) {
       trade_type,
       issued_date,
       expiration_date,
-      rough_in_required: rough_in_required ?? true,
+      rough_in_required: roughInRequired,
+      rough_in_due_date: roughInDueDate,
       notes: notes ?? null,
       status: "open",
     })

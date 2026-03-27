@@ -62,8 +62,18 @@ async function evaluateAndSendReminders(permit: any, today: string): Promise<num
   const daysUntilExpiration = daysBetween(now, expiration)
 
   if (permit.rough_in_required && !permit.rough_in_called_at) {
-    if (daysSinceIssued >= 3 && daysSinceIssued < 7) remindersToSend.push("rough_in_due")
-    if (daysSinceIssued >= 7) remindersToSend.push("rough_in_overdue")
+    if (permit.rough_in_due_date) {
+      // Use the trade-specific due date calculated at permit creation
+      const dueDate = new Date(permit.rough_in_due_date)
+      const daysUntilDue = daysBetween(now, dueDate)
+      const daysPastDue = daysBetween(dueDate, now)
+      if (daysUntilDue === 7 || daysUntilDue === 3) remindersToSend.push("rough_in_due")
+      if (daysPastDue >= 1) remindersToSend.push("rough_in_overdue")
+    } else {
+      // Fallback for permits created before rough_in_due_date was populated
+      if (daysSinceIssued >= 3 && daysSinceIssued < 7) remindersToSend.push("rough_in_due")
+      if (daysSinceIssued >= 7) remindersToSend.push("rough_in_overdue")
+    }
   }
 
   if (daysUntilExpiration === 30) remindersToSend.push("expiration_30day")

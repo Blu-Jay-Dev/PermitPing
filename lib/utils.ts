@@ -5,23 +5,39 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// Permit duration defaults by trade type (in days)
+// Permit duration defaults by trade type (in days).
+// Based on typical US residential permit windows.
+// Contractors can always override on the permit form.
 export const DEFAULT_PERMIT_DURATION_DAYS: Record<string, number> = {
-  electrical: 180,
-  hvac: 180,
-  plumbing: 180,
-  building: 365,
-  other: 180,
+  electrical: 180,  // 6 months — standard US residential
+  hvac:       180,  // 6 months
+  plumbing:   180,  // 6 months
+  building:   365,  // 12 months — GC projects run longer
+  other:      180,
 }
 
-export function calculateExpirationDate(
-  issuedDate: Date,
-  tradeType: string
-): Date {
+// Days after issue date when rough-in inspection is typically due.
+// Drives rough_in_due_date on the permit and reminder timing.
+export const ROUGH_IN_DUE_DAYS: Record<string, number> = {
+  electrical: 90,   // Must inspect wiring before drywall
+  hvac:       90,   // Must inspect ductwork / refrigerant lines before drywall
+  plumbing:   90,   // Must inspect rough plumbing before covering
+  building:   120,  // Framing inspection — longer project timelines
+  other:      90,
+}
+
+export function calculateExpirationDate(issuedDate: Date, tradeType: string): Date {
   const days = DEFAULT_PERMIT_DURATION_DAYS[tradeType] ?? 180
   const expiration = new Date(issuedDate)
   expiration.setDate(expiration.getDate() + days)
   return expiration
+}
+
+export function calculateRoughInDueDate(issuedDate: Date, tradeType: string): Date {
+  const days = ROUGH_IN_DUE_DAYS[tradeType] ?? 90
+  const due = new Date(issuedDate)
+  due.setDate(due.getDate() + days)
+  return due
 }
 
 export type UrgencyLevel = "critical" | "warning" | "normal" | "closed"
