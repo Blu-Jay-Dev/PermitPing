@@ -1,0 +1,31 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark circle background -->
+  <circle cx="256" cy="256" r="256" fill="#1c1917"/>
+
+  <!--
+    The P / Jockey Helmet mark
+    The bowl of the P doubles as a jockey helmet dome.
+    Amber peak = visor. Amber curve = chin strap.
+
+    Geometry:
+    Stem:  x=180–226, y=155–360 (46×205px)
+    Bowl:  half-ellipse from (226,155) to (226,269), rx=80, ry=57
+           Centre of arc = (226, 212). Max x = 306.
+    Peak:  triangle (303,205)→(350,212)→(303,221)
+    Strap: curve from (226,269) → Q(262,315) → (295,318)
+  -->
+
+  <!-- Stem -->
+  <rect x="180" y="155" width="46" height="205" rx="10" fill="white"/>
+
+  <!-- Helmet dome (bowl of the P) -->
+  <path d="M 226 155 A 80 57 0 0 1 226 269 L 226 155 Z" fill="white"/>
+
+  <!-- Visor / peak -->
+  <path d="M 303 205 L 350 212 L 303 221 Z" fill="#f59e0b"/>
+
+  <!-- Chin strap -->
+  <path d="M 226 269 Q 262 315 295 318"
+        stroke="#f59e0b" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</svg>
