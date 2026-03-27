@@ -1,3 +1,5 @@
+"use client"
+
 import { SignUp } from "@clerk/nextjs"
 import { Logo } from "@/components/logo"
 
@@ -8,7 +10,12 @@ export default function SignUpPage() {
         <Logo height={32} />
         <p className="text-gray-600 text-sm">14-day free trial · No credit card required</p>
       </div>
-      <SignUp />
+      <SignUp
+        routing="path"
+        path="/sign-up"
+        forceRedirectUrl="/onboarding"
+        signInUrl="/sign-in"
+      />
     </div>
   )
 }

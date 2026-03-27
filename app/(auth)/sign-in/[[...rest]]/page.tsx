@@ -1,3 +1,5 @@
+"use client"
+
 import { SignIn } from "@clerk/nextjs"
 import { Logo } from "@/components/logo"
 
@@ -7,7 +9,12 @@ export default function SignInPage() {
       <div className="mb-6">
         <Logo height={32} />
       </div>
-      <SignIn />
+      <SignIn
+        routing="path"
+        path="/sign-in"
+        forceRedirectUrl="/dashboard"
+        signUpUrl="/sign-up"
+      />
     </div>
   )
 }
