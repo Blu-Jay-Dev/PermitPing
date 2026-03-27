@@ -7,6 +7,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://permitjockey.com"),
   title: "PermitJockey — Stop forgetting open permits",
   description:
     "Get SMS + email reminders before inspection windows close and permits expire. Built for electricians, HVAC, plumbers, and GCs.",
@@ -16,6 +17,14 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "PermitJockey",
   },
+  openGraph: {
+    title: "PermitJockey — Stop forgetting open permits",
+    description:
+      "Get SMS + email reminders before inspection windows close and permits expire. Built for electricians, HVAC, plumbers, and GCs.",
+    url: "https://permitjockey.com",
+    siteName: "PermitJockey",
+    type: "website",
+  },
 }
 
 export const viewport: Viewport = {
@@ -23,7 +32,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#2563eb",
+  themeColor: "#fbbf24",
 }
 
 export default function RootLayout({
