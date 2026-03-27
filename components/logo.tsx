@@ -88,22 +88,23 @@ interface LogoProps {
 export function Logo({ white = false, className = "", height = 32 }: LogoProps) {
   const fg = white ? "white" : "#1c1917"
   // Mark: source paths live in viewBox 200 100 900 480.
-  // Horse y spans 147→548 = 401 units. Max fitting scale = 68/401 ≈ 0.170.
-  // scale=0.165 gives 66px tall with ~1px breathing room each side.
-  // markY=-7 centres the figure: top lands at ~0.8px, bottom at ~67px.
-  const markScale = 0.165
+  // Horse M-command y spans 147→548 (401 units), but relative path segments
+  // can extend slightly beyond — so use scale=0.14 for generous headroom,
+  // and overflow="visible" so the SVG viewport never clips the illustration.
+  // markY=0 lets the figure sit naturally; top lands ~6px, bottom ~63px.
+  const markScale = 0.14
   const markX = 5
-  const markY = -7
+  const markY = 0
 
   return (
     <svg
-      viewBox="0 0 420 68"
+      viewBox="0 0 400 68"
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-label="PermitJockey"
       className={className}
-      style={{ display: "block" }}
+      style={{ display: "block", overflow: "visible" }}
     >
       {/* Jockey illustration mark — black (matches wordmark colour) */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
@@ -112,7 +113,7 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
 
       {/* Wordmark */}
       <text
-        x="158"
+        x="142"
         y="49"
         fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
         fontSize="36"
