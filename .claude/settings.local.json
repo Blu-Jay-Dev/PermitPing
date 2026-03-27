@@ -11,7 +11,14 @@
       "Bash(node -e \":*)",
       "Bash(gh pr:*)",
       "Bash(powershell -Command \"Get-Content ''C:\\\\Users\\\\jacob\\\\Downloads\\\\FreeSample-Vectorizer-io-Gemini_Generated_Image_8u6ykk8u6ykk8u6y.svg'' -TotalCount 30\")",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(powershell -Command \"Get-Content ''C:\\\\Users\\\\jacob\\\\Downloads\\\\FreeSample-Vectorizer-io-Gemini_Generated_Image_8u6ykk8u6ykk8u6y.svg'' -Raw | Measure-Object -Line -Character\")",
+      "Bash(python3 -c \":*)",
+      "Bash(python3 -c \"import os; os.remove\\(r''C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing\\\\_logo_paths.json''\\); print\\(''cleaned up''\\)\")",
+      "Bash(find C:UsersjacobDocumentsPermitPing -type f -name *.sql -o -name *schema* -o -name *database*)",
+      "Bash(ls -la \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)\")",
+      "Bash(ls -la \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)/permits\")",
+      "Bash(find \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)/permits\" -type f)"
     ]
   }
 }

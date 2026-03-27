@@ -60,20 +60,29 @@ export default async function DashboardPage() {
       {/* Summary strip */}
       {allPermits.length > 0 && (
         <div className="bg-white border-b border-gray-100 px-4 py-3">
-          <div className="flex gap-4 text-sm">
-            {critical > 0 && (
-              <span className="text-red-600 font-semibold">
-                🔴 {critical} Need Action
-              </span>
-            )}
-            {warning > 0 && (
-              <span className="text-yellow-600 font-semibold">
-                🟡 {warning} Watch
-              </span>
-            )}
-            {closed > 0 && (
-              <span className="text-gray-500">✅ {closed}</span>
-            )}
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex gap-4 text-sm">
+              {critical > 0 && (
+                <span className="text-red-600 font-semibold">🔴 {critical} Need Action</span>
+              )}
+              {warning > 0 && (
+                <span className="text-yellow-600 font-semibold">🟡 {warning} Watch</span>
+              )}
+              {closed > 0 && (
+                <span className="text-gray-500">✅ {closed}</span>
+              )}
+            </div>
+            <a
+              href="/api/permits/export"
+              className="text-xs text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1"
+              download
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 2v8m0 0L5 7m3 3l3-3M2 12h12" stroke="currentColor" strokeWidth="1.5"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Export CSV
+            </a>
           </div>
         </div>
       )}
