@@ -3,29 +3,24 @@
   <circle cx="256" cy="256" r="256" fill="#1c1917"/>
 
   <!--
-    The P / Jockey Helmet mark
-    The bowl of the P doubles as a jockey helmet dome.
-    Amber peak = visor. Amber curve = chin strap.
-
-    Geometry:
-    Stem:  x=180–226, y=155–360 (46×205px)
-    Bowl:  half-ellipse from (226,155) to (226,269), rx=80, ry=57
-           Centre of arc = (226, 212). Max x = 306.
-    Peak:  triangle (303,205)→(350,212)→(303,221)
-    Strap: curve from (226,269) → Q(262,315) → (295,318)
+    Jockey helmet — front view.
+    Dome: cubic bezier arc from (97,308) to (415,308), peaking at ~y=152.
+    Stripe: amber band clipped to dome.
+    Brim: wide rounded rect beneath dome.
   -->
 
-  <!-- Stem -->
-  <rect x="180" y="155" width="46" height="205" rx="10" fill="white"/>
+  <defs>
+    <clipPath id="dome-clip">
+      <path d="M 97 308 C 97 108 415 108 415 308 Z"/>
+    </clipPath>
+  </defs>
 
-  <!-- Helmet dome (bowl of the P) -->
-  <path d="M 226 155 A 80 57 0 0 1 226 269 L 226 155 Z" fill="white"/>
+  <!-- Dome (white) -->
+  <path d="M 97 308 C 97 108 415 108 415 308 Z" fill="white"/>
 
-  <!-- Visor / peak -->
-  <path d="M 303 205 L 350 212 L 303 221 Z" fill="#f59e0b"/>
+  <!-- Amber goggle stripe — clipped to dome -->
+  <rect x="80" y="210" width="352" height="60" fill="#f59e0b" clip-path="url(#dome-clip)"/>
 
-  <!-- Chin strap -->
-  <path d="M 226 269 Q 262 315 295 318"
-        stroke="#f59e0b" stroke-width="10"
-        fill="none" stroke-linecap="round"/>
+  <!-- Brim (wider than dome, flush with dome base) -->
+  <rect x="52" y="295" width="408" height="58" rx="14" fill="white"/>
 </svg>
