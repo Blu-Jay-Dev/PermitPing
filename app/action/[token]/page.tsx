@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { createClient } from "@supabase/supabase-js"
+import { Logo } from "@/components/logo"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getServiceClient(): any {
@@ -42,6 +43,7 @@ export default async function ActionPage({
   if (!tokenRow && !isSuccess) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
+        <div className="mb-8"><Logo height={24} /></div>
         <div className="text-5xl mb-4">⚠️</div>
         <h1 className="text-xl font-bold text-gray-900 mb-2">Link Not Found</h1>
         <p className="text-gray-600">

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { createServiceClient } from "@/lib/supabase/server"
 import { getPermitUrgency } from "@/lib/utils"
 import DashboardClient from "./dashboard-client"
+import { Logo } from "@/components/logo"
 import type { Permit, Job } from "@/lib/supabase/types"
 
 export type PermitWithJob = Permit & { job: Job | null }
@@ -46,7 +47,7 @@ export default async function DashboardPage() {
       {/* Sticky header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3">
         <div className="flex items-center justify-between">
-          <span className="font-bold text-lg text-blue-600">PermitJockey</span>
+          <Logo height={24} />
           <Link
             href="/permits/new"
             className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors"

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useUser } from "@clerk/nextjs"
+import { Logo } from "@/components/logo"
 
 const US_STATES = [
   "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA",
@@ -67,13 +68,14 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-white p-6">
       <div className="max-w-md mx-auto space-y-8">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Welcome to PermitJockey
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Let&apos;s set up your account so we can send the right reminders.
-          </p>
+        <div className="space-y-3">
+          <Logo height={28} />
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Welcome aboard</h1>
+            <p className="text-gray-600 mt-1">
+              Let&apos;s set up your account so we can send the right reminders.
+            </p>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

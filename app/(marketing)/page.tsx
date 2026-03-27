@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
+import { Logo } from "@/components/logo"
 
 // ─── Count-up hook ───────────────────────────────────────────────────────────
 function useCountUp(target: number, duration = 1400) {
@@ -189,12 +190,7 @@ export default function LandingPage() {
       {/* ── Nav ─────────────────────────────────────────────────────────────── */}
       <header className="bg-[#f8f7f4]/90 backdrop-blur border-b border-stone-200 px-6 py-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center">
-              <div className="w-2.5 h-2.5 rounded-full bg-white" />
-            </div>
-            <span className="font-bold text-stone-900 text-lg tracking-tight">PermitJockey</span>
-          </div>
+          <Logo height={28} />
           <div className="flex items-center gap-6">
             {/* Desktop nav links */}
             <nav className="hidden lg:flex items-center gap-6 text-sm text-stone-500">
@@ -452,12 +448,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             {/* Brand */}
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-white" />
-              </div>
-              <span className="font-bold text-stone-700 text-sm">PermitJockey</span>
-            </div>
+            <Logo height={22} />
 
             {/* Trades */}
             <p className="text-sm text-stone-400">
