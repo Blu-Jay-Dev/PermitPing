@@ -8,7 +8,10 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(git checkout:*)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(gh pr:*)",
+      "Bash(powershell -Command \"Get-Content ''C:\\\\Users\\\\jacob\\\\Downloads\\\\FreeSample-Vectorizer-io-Gemini_Generated_Image_8u6ykk8u6ykk8u6y.svg'' -TotalCount 30\")",
+      "Bash(npx tsc:*)"
     ]
   }
 }

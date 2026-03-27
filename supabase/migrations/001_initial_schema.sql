@@ -77,7 +77,8 @@ create table reminders (
 -- Action tokens for no-login reminder links
 create table action_tokens (
   id uuid primary key default uuid_generate_v4(),
-  token text unique not null default encode(gen_random_bytes(32), 'hex'),
+  -- 8 bytes = 16 hex chars → URL fits in ~50 chars, keeping SMS under 160 GSM chars
+  token text unique not null default encode(gen_random_bytes(8), 'hex'),
   permit_id uuid references permits(id) on delete cascade not null,
   contractor_id uuid references contractors(id) on delete cascade not null,
   action text check (action in ('mark_rough_called','mark_rough_passed','mark_final_called','mark_final_passed')) not null,

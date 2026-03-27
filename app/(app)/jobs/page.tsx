@@ -64,7 +64,7 @@ export default async function JobsPage() {
             </Link>
           </div>
         ) : (
-          activeJobs.map((job) => {
+          activeJobs.map((job: any) => {
             const permits = (job.permits as any[]) ?? []
             const openCount = permits.filter(
               (p) => p.status !== "closed" && p.status !== "expired"

@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { createClient } from "@/lib/supabase/client"
 import { useToast } from "@/components/ui/toast"
 import {
   getPermitUrgency,
@@ -95,15 +94,18 @@ export default function PermitCard({ permit, onUpdate }: Props) {
     setLoading(true)
 
     try {
-      const supabase = createClient()
-      const { data, error } = await supabase
-        .from("permits")
-        .update(update)
-        .eq("id", localPermit.id)
-        .select()
-        .single()
+      const res = await fetch(`/api/permits/${localPermit.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(update),
+      })
 
-      if (error) throw error
+      if (!res.ok) {
+        const body = await res.json()
+        throw new Error(body.error ?? "Update failed")
+      }
+
+      const { permit: data } = await res.json()
       if (data) {
         setLocalPermit({ ...data, job: localPermit.job })
         onUpdate?.(data)

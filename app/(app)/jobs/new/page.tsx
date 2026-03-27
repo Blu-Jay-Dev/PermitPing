@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
+import { useToast } from "@/components/ui/toast"
 
 export default function NewJobPage() {
   const router = useRouter()
+  const { toast } = useToast()
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [form, setForm] = useState({
@@ -25,35 +26,26 @@ export default function NewJobPage() {
     setError(null)
 
     try {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) throw new Error("Not signed in")
-
-      // Get contractor id
-      const { data: contractor } = await supabase
-        .from("contractors")
-        .select("id")
-        .eq("clerk_user_id", user.id)
-        .single()
-
-      if (!contractor) throw new Error("Contractor not found")
-
-      const { data: job, error: jobError } = await supabase
-        .from("jobs")
-        .insert({
-          contractor_id: contractor.id,
+      const res = await fetch("/api/jobs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           name: form.address.trim(),
           address: form.address.trim(),
           client_name: form.client_name.trim() || null,
-          notes: form.notes.trim() || null,
-        })
-        .select("id")
-        .single()
+        }),
+      })
 
-      if (jobError) throw jobError
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error ?? "Failed to create job")
+      }
 
+      const { job } = await res.json()
+      toast("Job created!", "success")
       router.push(`/permits/new?job_id=${job.id}`)
     } catch (err: any) {
+      toast(err.message ?? "Failed to create job", "error")
       setError(err.message)
       setSaving(false)
     }

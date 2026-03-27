@@ -151,36 +151,47 @@ function buildMessage(
     day: "numeric",
   })
 
+  // SMS character budget:
+  //   Token = 16 hex chars → URL = ~50 chars (https://permitjockey.com/action/xxxxxxxxxxxxxxxx)
+  //   No emoji — emoji triggers UCS-2 encoding (70-char segments instead of 160-char GSM)
+  //   All templates stay under 160 chars with addresses up to ~50 chars
   const messages: Record<ReminderType, { subject: string; body: string; sms: string }> = {
     rough_in_due: {
       subject: `Rough-in inspection reminder — ${address}`,
       body: `Your ${permit.trade_type} permit (#${permitNum}) at ${address} was issued ${daysBetween(new Date(permit.issued_date), new Date())} days ago. Have you called for a rough-in inspection yet?\n\nMark it done: ${actionUrl}`,
-      sms: `PermitJockey: Rough-in for ${address} (#${permitNum}) — called yet? Exp ${expDate}. Update: ${actionUrl}`,
+      // max ~115 chars fixed + address + expDate
+      sms: `PermitJockey: Rough-in for ${address} not called. Exp ${expDate}. Update: ${actionUrl}`,
     },
     rough_in_overdue: {
-      subject: `⚠️ Rough-in overdue — ${address}`,
+      subject: `Rough-in overdue — ${address}`,
       body: `Your rough-in inspection at ${address} is overdue. Permit expires ${expDate}.\n\nMark called: ${actionUrl}`,
-      sms: `⚠️ PermitJockey: Rough-in OVERDUE at ${address}. Exp ${expDate}. Mark called: ${actionUrl}`,
+      // max ~107 chars fixed + address + expDate
+      sms: `PermitJockey: Rough-in OVERDUE at ${address}. Exp ${expDate}. Mark called: ${actionUrl}`,
     },
     expiration_30day: {
       subject: `Permit expires in 30 days — ${address}`,
       body: `Your ${permit.trade_type} permit (#${permitNum}) at ${address} expires on ${expDate}. Make sure all inspections are scheduled.\n\nView permit: ${actionUrl}`,
-      sms: `PermitJockey: Permit at ${address} expires ${expDate} (30 days). Schedule inspections: ${actionUrl}`,
+      // max ~97 chars fixed + address + expDate
+      sms: `PermitJockey: Permit at ${address} expires ${expDate} (30 days). ${actionUrl}`,
     },
     expiration_7day: {
-      subject: `⚠️ Permit expires in 7 days — ${address}`,
+      subject: `Permit expires in 7 days — ${address}`,
       body: `URGENT: Your permit at ${address} expires ${expDate}. ${!permit.final_called_at ? "Final inspection has not been called." : ""}\n\nTake action: ${actionUrl}`,
-      sms: `⚠️ PermitJockey: Permit at ${address} expires in 7 DAYS (${expDate}). Act now: ${actionUrl}`,
+      // max ~108 chars fixed + address + expDate
+      sms: `PermitJockey: Permit at ${address} expires in 7 DAYS (${expDate}). Act now: ${actionUrl}`,
     },
     expiration_1day: {
-      subject: `🚨 Permit expires TOMORROW — ${address}`,
+      subject: `Permit expires TOMORROW — ${address}`,
       body: `Your permit at ${address} expires TOMORROW (${expDate}). Contact your building department immediately.\n\nView: ${actionUrl}`,
-      sms: `🚨 PermitJockey: Permit at ${address} expires TOMORROW (${expDate}). Call your building dept NOW.`,
+      // No URL needed — final urgency, just call the building dept
+      // max ~73 chars fixed + address + expDate — well under 160
+      sms: `PermitJockey: Permit at ${address} expires TOMORROW (${expDate}). Call your building dept NOW.`,
     },
     final_overdue: {
       subject: `Final inspection not called — ${address}`,
       body: `Your rough-in passed at ${address} but no final inspection has been called. Permit expires ${expDate}.\n\nMark final called: ${actionUrl}`,
-      sms: `PermitJockey: Final inspection not called at ${address}. Exp ${expDate}. Mark done: ${actionUrl}`,
+      // max ~114 chars fixed + address + expDate
+      sms: `PermitJockey: Final not called at ${address}. Exp ${expDate}. Mark done: ${actionUrl}`,
     },
   }
 
@@ -208,8 +219,21 @@ async function sendEmail(to: string, subject: string, text: string) {
 }
 
 async function sendSms(to: string, body: string) {
-  // Keep under 160 chars
-  const truncated = body.length > 160 ? body.substring(0, 157) + "..." : body
+  // Keep under 160 GSM chars (no emoji — emoji triggers UCS-2 / 70-char segments)
+  // If over budget, drop excess from the middle rather than cutting the URL at the end
+  let truncated = body
+  if (body.length > 160) {
+    // Find the last URL in the message and preserve it
+    const urlMatch = body.match(/https?:\/\/\S+$/)
+    if (urlMatch) {
+      const url = urlMatch[0]
+      const prefix = body.slice(0, body.length - url.length)
+      const allowedPrefix = 160 - url.length - 1 // -1 for space
+      truncated = prefix.slice(0, Math.max(allowedPrefix - 3, 0)).trimEnd() + "..." + " " + url
+    } else {
+      truncated = body.substring(0, 157) + "..."
+    }
+  }
   try {
     const auth = btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`)
     const form = new URLSearchParams({

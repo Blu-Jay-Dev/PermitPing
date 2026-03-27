@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
+import { useToast } from "@/components/ui/toast"
 
 const TRADE_OPTIONS = [
   { value: "electrician", label: "Electrician" },
@@ -22,6 +22,7 @@ const US_STATES = [
 
 export default function SettingsEditPage() {
   const router = useRouter()
+  const { toast } = useToast()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -36,25 +37,23 @@ export default function SettingsEditPage() {
 
   useEffect(() => {
     async function load() {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-
-      const { data } = await supabase
-        .from("contractors")
-        .select("company_name, phone, trade_type, state")
-        .eq("clerk_user_id", user.id)
-        .single()
-
-      if (data) {
-        setForm({
-          company_name: data.company_name ?? "",
-          phone: data.phone ?? "",
-          trade_type: data.trade_type ?? "",
-          state: data.state ?? "",
-        })
+      try {
+        const res = await fetch("/api/onboarding")
+        if (!res.ok) return
+        const { contractor } = await res.json()
+        if (contractor) {
+          setForm({
+            company_name: contractor.company_name ?? "",
+            phone: contractor.phone ?? "",
+            trade_type: contractor.trade_type ?? "",
+            state: contractor.state ?? "",
+          })
+        }
+      } catch {
+        // silently ignore — form stays blank and user can fill it in
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
     load()
   }, [])
@@ -76,9 +75,11 @@ export default function SettingsEditPage() {
         throw new Error(body.error ?? "Failed to save")
       }
 
+      toast("Profile saved!", "success")
       setSuccess(true)
       setTimeout(() => router.push("/settings"), 1000)
     } catch (err: any) {
+      toast(err.message ?? "Failed to save", "error")
       setError(err.message)
     } finally {
       setSaving(false)
