@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Logo } from "@/components/logo"
 
 // ─── Count-up hook ───────────────────────────────────────────────────────────
@@ -243,7 +243,7 @@ export default function LandingPage() {
                   Start Free — 14 Days →
                 </Link>
               </div>
-              <p className="text-stone-400 text-xs">
+              <p className="text-stone-400 text-sm">
                 No credit card · No app to install · Cancel anytime
               </p>
 
@@ -414,22 +414,31 @@ export default function LandingPage() {
               >
                 Start Free Trial →
               </Link>
-              <p className="text-stone-600 text-xs">14 days free · No credit card required</p>
+              <p className="text-stone-500 text-sm">14 days free · No credit card required</p>
             </div>
 
             {/* Right — features */}
             <div className="mt-10 lg:mt-0">
               <ul className="space-y-4">
-                {[
-                  { icon: "📋", text: "Unlimited permits & jobs" },
-                  { icon: "📱", text: "SMS + email reminders — no per-message fees" },
-                  { icon: "🔗", text: "No-login action links from every reminder" },
-                  { icon: "⚡", text: "Nightly deadline check, 7am reminder delivery" },
-                  { icon: "📊", text: "CSV export of all open permits" },
-                  { icon: "❌", text: "Cancel anytime, no contracts" },
-                ].map((f, i) => (
+                {(
+                  [
+                    { icon: "📋", text: "Unlimited permits & jobs" },
+                    { icon: "📱", text: "SMS + email reminders — no per-message fees" },
+                    { icon: "🔗", text: "No-login action links from every reminder" },
+                    { icon: "⚡", text: "Nightly deadline check, 7am reminder delivery" },
+                    { icon: "📊", text: "CSV export of all open permits" },
+                    {
+                      icon: (
+                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold leading-none flex-shrink-0">
+                          ✕
+                        </span>
+                      ),
+                      text: "Cancel anytime, no contracts",
+                    },
+                  ] as { icon: React.ReactNode; text: string }[]
+                ).map((f, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <span className="text-lg">{f.icon}</span>
+                    <span className="text-lg leading-none flex-shrink-0">{f.icon}</span>
                     <span className="text-stone-300 text-base">{f.text}</span>
                   </li>
                 ))}
