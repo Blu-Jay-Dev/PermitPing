@@ -89,18 +89,28 @@ const HORSE_PATH =
   "c0.073,1.082,0.198,2.275,0.718,3.179c0.399,0.696,1.102,1.331,2.105,1.696c1.409,0.519,2.59,1.641,4.253,2.763" +
   "c-0.442-3.773,0.952-6.941,0.599-10.299c-0.167-1.624-0.635-3.147-1.062-4.666C89.083,134.962,87.514,133.905,85.813,133.108z"
 
-// Jockey "P" position on horse's back (in the 512×512 icon coordinate space)
-// Horse is scaled ×1.65 and translated (75,50)
-// Tweak these if the P needs nudging after preview
-const ICON_JOCKEY_X = 228
-const ICON_JOCKEY_Y = 192
-const ICON_JOCKEY_SIZE = 58
+// ─── Jockey figure constants ──────────────────────────────────────────────────
+// Horse is facing LEFT. Jockey sits on its back, leaning forward.
+// Rotate the whole figure ~-12° to lean into the gallop.
+//
+// Icon (512×512, horse at translate(75,50) scale(1.65)):
+const ICON_PIVOT_X = 222      // rotation centre x (base of jockey)
+const ICON_PIVOT_Y = 168      // rotation centre y
+const ICON_HEAD_CX = 230      // helmet centre x
+const ICON_HEAD_CY = 128      // helmet centre y (above body)
+const ICON_BODY_X  = 206      // P text anchor x
+const ICON_BODY_Y  = 172      // P text anchor y (baseline)
+const ICON_BODY_SZ = 50       // P font-size
 
-// Wordmark version: horse scaled to ~52px tall, translate(4,8) scale(0.237)
-const WM_SCALE = 0.237
-const WM_JOCKEY_X = 4 + 100 * WM_SCALE   // ≈ 27.7
-const WM_JOCKEY_Y = 8 + 75 * WM_SCALE    // ≈ 25.8
-const WM_JOCKEY_SIZE = 14
+// Wordmark (horse at translate(4,8) scale(0.237)):
+const WM_SCALE     = 0.237
+const WM_PIVOT_X   = 25
+const WM_PIVOT_Y   = 25
+const WM_HEAD_CX   = 27
+const WM_HEAD_CY   = 18
+const WM_BODY_X    = 22
+const WM_BODY_Y    = 26
+const WM_BODY_SZ   = 9
 
 interface LogoProps {
   white?: boolean
@@ -127,17 +137,22 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
         <path d={HORSE_PATH} />
       </g>
 
-      {/* Amber P jockey on horse's back */}
-      <text
-        x={WM_JOCKEY_X}
-        y={WM_JOCKEY_Y}
-        fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
-        fontSize={WM_JOCKEY_SIZE}
-        fontWeight="900"
-        fill={amber}
-      >
-        P
-      </text>
+      {/* Jockey figure — helmet + body, leaning forward */}
+      <g transform={`rotate(-12, ${WM_PIVOT_X}, ${WM_PIVOT_Y})`}>
+        {/* Helmet */}
+        <ellipse cx={WM_HEAD_CX} cy={WM_HEAD_CY} rx={2.8} ry={2.4} fill={amber} />
+        {/* Helmet peak — points left (horse faces left) */}
+        <path d={`M ${WM_HEAD_CX-2.5} ${WM_HEAD_CY+0.5} L ${WM_HEAD_CX-6} ${WM_HEAD_CY+1.5} L ${WM_HEAD_CX-2.5} ${WM_HEAD_CY+3} Z`} fill={amber} />
+        {/* Body */}
+        <text
+          x={WM_BODY_X}
+          y={WM_BODY_Y}
+          fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
+          fontSize={WM_BODY_SZ}
+          fontWeight="900"
+          fill={amber}
+        >P</text>
+      </g>
 
       {/* Wordmark */}
       <text
@@ -180,17 +195,22 @@ export function LogoIcon({ size = 40, className = "" }: LogoIconProps) {
         <path d={HORSE_PATH} />
       </g>
 
-      {/* Amber P jockey */}
-      <text
-        x={ICON_JOCKEY_X}
-        y={ICON_JOCKEY_Y}
-        fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
-        fontSize={ICON_JOCKEY_SIZE}
-        fontWeight="900"
-        fill="#f59e0b"
-      >
-        P
-      </text>
+      {/* Jockey figure — helmet + body, leaning forward into gallop */}
+      <g transform={`rotate(-12, ${ICON_PIVOT_X}, ${ICON_PIVOT_Y})`}>
+        {/* Helmet dome */}
+        <ellipse cx={ICON_HEAD_CX} cy={ICON_HEAD_CY} rx={18} ry={15} fill="#f59e0b" />
+        {/* Helmet peak — points left (horse faces left) */}
+        <path d={`M ${ICON_HEAD_CX-16} ${ICON_HEAD_CY+2} L ${ICON_HEAD_CX-30} ${ICON_HEAD_CY+6} L ${ICON_HEAD_CX-16} ${ICON_HEAD_CY+12} Z`} fill="#f59e0b" />
+        {/* Body — bold P */}
+        <text
+          x={ICON_BODY_X}
+          y={ICON_BODY_Y}
+          fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
+          fontSize={ICON_BODY_SZ}
+          fontWeight="900"
+          fill="#f59e0b"
+        >P</text>
+      </g>
     </svg>
   )
 }
