@@ -188,9 +188,9 @@ export default function LandingPage() {
     <div className="min-h-screen bg-[#f8f7f4] font-sans">
 
       {/* ── Nav ─────────────────────────────────────────────────────────────── */}
-      <header className="bg-[#f8f7f4]/90 backdrop-blur border-b border-stone-200 px-6 py-4 sticky top-0 z-50">
+      <header className="bg-[#f8f7f4]/90 backdrop-blur border-b border-stone-200 px-6 py-5 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Logo height={28} />
+          <Logo height={38} />
           <div className="flex items-center gap-6">
             {/* Desktop nav links */}
             <nav className="hidden lg:flex items-center gap-6 text-sm text-stone-500">
@@ -223,7 +223,7 @@ export default function LandingPage() {
               </div>
 
               {/* Headline */}
-              <h1 className="text-[2.75rem] lg:text-[3.5rem] font-black text-stone-900 leading-[1.05] tracking-tight">
+              <h1 className="text-[2.75rem] lg:text-[4.5rem] font-black text-stone-900 leading-[1.05] tracking-tight">
                 Permit expired.<br />
                 <span className="text-red-500">$800 re-pull fee.</span><br />
                 Never again.
@@ -448,7 +448,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             {/* Brand */}
-            <Logo height={22} />
+            <Logo height={28} />
 
             {/* Trades */}
             <p className="text-sm text-stone-400">
