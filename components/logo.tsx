@@ -1,9 +1,12 @@
 /**
  * PermitJockey Logo Components
  *
- * <Logo />          — horizontal wordmark (dark, for light backgrounds)
- * <Logo white />    — horizontal wordmark (white, for dark backgrounds)
- * <LogoIcon />      — circular icon mark only (always dark bg + white/amber)
+ * <Logo />        — horizontal wordmark (dark on light bg)
+ * <Logo white />  — horizontal wordmark (white on dark bg)
+ * <LogoIcon />    — circular helmet icon mark only
+ *
+ * The mark is a jockey helmet (front view):
+ *   dome (cubic bezier arc) + amber goggle stripe + brim
  */
 
 interface LogoProps {
@@ -16,9 +19,16 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
   const fg = white ? "white" : "#1c1917"
   const amber = "#f59e0b"
 
+  // Wordmark viewBox 0 0 300 68
+  // Mark: helmet in a 48×54 space, centred vertically in 68px
+  // Dome: M 6 46 C 6 8 42 8 42 46 Z  → peaks at y≈17
+  // Stripe: rect y=30 h=9, clipped to dome
+  // Brim: rect x=2 y=43 w=44 h=11 rx=2
+  // Text: x=58, y=46 (baseline), font-size=36
+
   return (
     <svg
-      viewBox="0 0 320 80"
+      viewBox="0 0 300 68"
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -26,30 +36,27 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
       className={className}
       style={{ display: "block" }}
     >
-      {/* Stem */}
-      <rect x="0" y="8" width="14" height="64" rx="3" fill={fg} />
+      <defs>
+        <clipPath id="wm-dome">
+          <path d="M 7 47 C 7 9 43 9 43 47 Z" />
+        </clipPath>
+      </defs>
 
-      {/* Helmet dome (bowl of P) */}
-      <path d="M 14 8 A 25 18 0 0 1 14 44 L 14 8 Z" fill={fg} />
+      {/* Helmet dome */}
+      <path d="M 7 47 C 7 9 43 9 43 47 Z" fill={fg} />
 
-      {/* Visor / peak */}
-      <path d="M 38 20 L 57 26 L 38 32 Z" fill={amber} />
+      {/* Amber goggle stripe — clipped to dome */}
+      <rect x="5" y="31" width="40" height="10" fill={amber} clipPath="url(#wm-dome)" />
 
-      {/* Chin strap */}
-      <path
-        d="M 14 44 Q 26 60 40 63"
-        stroke={amber}
-        strokeWidth="5"
-        fill="none"
-        strokeLinecap="round"
-      />
+      {/* Brim */}
+      <rect x="2" y="44" width="46" height="13" rx="2.5" fill={fg} />
 
       {/* Wordmark */}
       <text
-        x="68"
-        y="54"
+        x="58"
+        y="49"
         fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
-        fontSize="38"
+        fontSize="36"
         fill={fg}
         letterSpacing="-0.5"
       >
@@ -80,23 +87,20 @@ export function LogoIcon({ size = 40, className = "" }: LogoIconProps) {
       {/* Dark circle */}
       <circle cx="256" cy="256" r="256" fill="#1c1917" />
 
-      {/* Stem */}
-      <rect x="180" y="155" width="46" height="205" rx="10" fill="white" />
+      <defs>
+        <clipPath id="icon-dome">
+          <path d="M 97 308 C 97 108 415 108 415 308 Z" />
+        </clipPath>
+      </defs>
 
-      {/* Helmet dome */}
-      <path d="M 226 155 A 80 57 0 0 1 226 269 L 226 155 Z" fill="white" />
+      {/* Dome */}
+      <path d="M 97 308 C 97 108 415 108 415 308 Z" fill="white" />
 
-      {/* Visor */}
-      <path d="M 303 205 L 350 212 L 303 221 Z" fill="#f59e0b" />
+      {/* Amber goggle stripe */}
+      <rect x="80" y="210" width="352" height="60" fill="#f59e0b" clipPath="url(#icon-dome)" />
 
-      {/* Chin strap */}
-      <path
-        d="M 226 269 Q 262 315 295 318"
-        stroke="#f59e0b"
-        strokeWidth="10"
-        fill="none"
-        strokeLinecap="round"
-      />
+      {/* Brim */}
+      <rect x="52" y="295" width="408" height="58" rx="14" fill="white" />
     </svg>
   )
 }

@@ -1,35 +1,24 @@
-<svg viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="PermitJockey">
-  <!--
-    Horizontal wordmark — dark on transparent (for light backgrounds)
+<svg viewBox="0 0 300 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="PermitJockey">
+  <!-- Jockey helmet mark — dark on transparent (light backgrounds) -->
+  <defs>
+    <clipPath id="wm-dome">
+      <path d="M 7 47 C 7 9 43 9 43 47 Z"/>
+    </clipPath>
+  </defs>
 
-    Mark is the P/helmet scaled to 64px tall, centred in 80px height (8px top/bottom margin).
-    Scale from icon: 64/205 ≈ 0.312
+  <!-- Dome -->
+  <path d="M 7 47 C 7 9 43 9 43 47 Z" fill="#1c1917"/>
 
-    Stem:  x=0–14, y=8–72 (14×64px)
-    Bowl:  half-ellipse M 14 8 A 25 18 0 0 1 14 44
-           (rx=25, ry=18; end y = 8+36 = 44; max x = 39)
-    Peak:  (38,20)→(57,26)→(38,32)
-    Strap: M 14 44 Q 26 60 40 63
-  -->
+  <!-- Amber goggle stripe -->
+  <rect x="5" y="31" width="40" height="10" fill="#f59e0b" clip-path="url(#wm-dome)"/>
 
-  <!-- Stem -->
-  <rect x="0" y="8" width="14" height="64" rx="3" fill="#1c1917"/>
+  <!-- Brim -->
+  <rect x="2" y="44" width="46" height="13" rx="2.5" fill="#1c1917"/>
 
-  <!-- Helmet dome -->
-  <path d="M 14 8 A 25 18 0 0 1 14 44 L 14 8 Z" fill="#1c1917"/>
-
-  <!-- Visor -->
-  <path d="M 38 20 L 57 26 L 38 32 Z" fill="#f59e0b"/>
-
-  <!-- Chin strap -->
-  <path d="M 14 44 Q 26 60 40 63"
-        stroke="#f59e0b" stroke-width="5"
-        fill="none" stroke-linecap="round"/>
-
-  <!-- Wordmark -->
-  <text x="68" y="54"
+  <!-- PermitJockey wordmark -->
+  <text x="58" y="49"
         font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
-        font-size="38"
+        font-size="36"
         fill="#1c1917"
         letter-spacing="-0.5">
     <tspan font-weight="400">Permit</tspan><tspan font-weight="800">Jockey</tspan>
