@@ -52,7 +52,7 @@ export default async function JobsPage() {
           <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
             <div className="text-5xl mb-4">🏗️</div>
             <h2 className="text-xl font-bold text-gray-900 mb-2">No jobs yet</h2>
-            <p className="text-gray-500 text-sm mb-6">
+            <p className="text-gray-500 text-base mb-6">
               Jobs group your permits by project. Add your first job or it&apos;ll be
               created automatically when you add a permit.
             </p>
@@ -92,7 +92,7 @@ export default async function JobsPage() {
                       {job.address ?? job.name}
                     </h3>
                     {job.client_name && (
-                      <p className="text-sm text-gray-500">{job.client_name}</p>
+                      <p className="text-base text-gray-500">{job.client_name}</p>
                     )}
                   </div>
                   {hasExpiring && (
@@ -102,7 +102,7 @@ export default async function JobsPage() {
                   )}
                 </div>
 
-                <div className="flex gap-3 text-xs text-gray-500">
+                <div className="flex gap-3 text-sm text-gray-500">
                   <span>{permits.length} permit{permits.length !== 1 ? "s" : ""}</span>
                   {openCount > 0 && (
                     <span className="text-blue-600 font-medium">{openCount} open</span>
@@ -115,13 +115,13 @@ export default async function JobsPage() {
                 <div className="flex gap-2 pt-1">
                   <Link
                     href={`/permits/new?job_id=${job.id}`}
-                    className="flex-1 text-center text-sm font-medium text-blue-600 border border-blue-200 rounded-lg py-2 active:bg-blue-50"
+                    className="flex-1 text-center text-base font-medium text-blue-600 border border-blue-200 rounded-lg py-2 active:bg-blue-50"
                   >
                     + Add Permit
                   </Link>
                   <Link
                     href={`/dashboard?job=${job.id}`}
-                    className="flex-1 text-center text-sm font-medium text-gray-700 border border-gray-200 rounded-lg py-2 active:bg-gray-50"
+                    className="flex-1 text-center text-base font-medium text-gray-700 border border-gray-200 rounded-lg py-2 active:bg-gray-50"
                   >
                     View Permits →
                   </Link>

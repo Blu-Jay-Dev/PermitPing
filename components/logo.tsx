@@ -87,18 +87,16 @@ interface LogoProps {
 
 export function Logo({ white = false, className = "", height = 32 }: LogoProps) {
   const fg = white ? "white" : "#1c1917"
-  // Mark: source paths live in viewBox 200 100 900 480.
-  // Horse M-command y spans 147→548 (401 units), but relative path segments
-  // can extend slightly beyond — so use scale=0.14 for generous headroom,
-  // and overflow="visible" so the SVG viewport never clips the illustration.
-  // markY=0 lets the figure sit naturally; top lands ~6px, bottom ~63px.
-  const markScale = 0.14
-  const markX = 5
-  const markY = 0
+  // At scale 0.11 the horse content renders to ~82×44 px.
+  // markX=3, markY=7 centres it inside the badge with ~10 px padding each side.
+  // Badge: x4 y3 104×62 rx14 (rx/h ≈ 22 % — iOS squircle ratio).
+  const markScale = 0.11
+  const markX = 3
+  const markY = 7
 
   return (
     <svg
-      viewBox="0 0 400 68"
+      viewBox="0 0 390 68"
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -106,14 +104,17 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
       className={className}
       style={{ display: "block", overflow: "visible" }}
     >
-      {/* Jockey illustration mark — black (matches wordmark colour) */}
+      {/* Amber squircle badge — #fbbf24 = Tailwind amber-400, matches site buttons */}
+      <rect x="4" y="3" width="104" height="62" rx="14" fill="#fbbf24" />
+
+      {/* Jockey illustration — black on amber */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
-        <path d={HORSE_BODY} fill={fg} />
+        <path d={HORSE_BODY} fill="#1c1917" />
       </g>
 
       {/* Wordmark */}
       <text
-        x="142"
+        x="122"
         y="49"
         fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
         fontSize="36"
@@ -133,13 +134,12 @@ interface LogoIconProps {
 }
 
 export function LogoIcon({ size = 40, className = "" }: LogoIconProps) {
-  const amber = "#f59e0b"
   // Mark: source viewBox 200 100 900 480 (aspect 900:480 = 15:8).
-  // Fit width=460 inside 512px circle → scale=460/900≈0.511
+  // Fit width=460 inside 512px squircle → scale=460/900≈0.511
   // Height at scale: 480*0.511≈245. Centre vertically: (512-245)/2≈134
   const markScale = 460 / 900
-  const markX = (512 - 460) / 2          // 26
-  const markY = (512 - 480 * markScale) / 2  // ≈134
+  const markX = (512 - 460) / 2           // 26
+  const markY = (512 - 480 * markScale) / 2   // ≈134
 
   return (
     <svg
@@ -152,15 +152,12 @@ export function LogoIcon({ size = 40, className = "" }: LogoIconProps) {
       className={className}
       style={{ display: "block" }}
     >
-      {/* Background circle */}
-      <circle cx="256" cy="256" r="256" fill="#1c1917" />
+      {/* Amber squircle background — #fbbf24 = Tailwind amber-400, matches site buttons */}
+      <rect x="0" y="0" width="512" height="512" rx="115" fill="#fbbf24" />
 
-      {/* Jockey illustration */}
+      {/* Jockey illustration — black on amber for maximum contrast */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
-        <path d={HORSE_BODY} fill={amber} />
-        {HIGHLIGHTS.map((h, i) => (
-          <path key={i} d={h} fill="white" />
-        ))}
+        <path d={HORSE_BODY} fill="#1c1917" />
       </g>
     </svg>
   )

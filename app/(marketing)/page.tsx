@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Logo } from "@/components/logo"
 
 // ─── Count-up hook ───────────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ function SmsThread() {
   }, [])
 
   return (
-    <div ref={ref} className="bg-stone-900 rounded-3xl p-3 shadow-2xl w-full max-w-xs mx-auto lg:mx-0 lg:max-w-sm">
+    <div ref={ref} className="bg-stone-900 rounded-3xl p-4 shadow-2xl w-full max-w-sm mx-auto lg:max-w-none">
       <div className="bg-stone-800 rounded-2xl overflow-hidden">
         <div className="flex justify-between items-center px-4 py-2 text-stone-500 text-[10px]">
           <span>9:41</span>
@@ -79,7 +79,7 @@ function SmsThread() {
             <div className="w-3 h-1.5 bg-stone-500 rounded-sm" />
           </div>
         </div>
-        <div className="px-3 pb-5 space-y-2 min-h-[200px]">
+        <div className="px-4 pb-8 space-y-3 min-h-[260px]">
           <div className="text-center text-stone-500 text-[10px] py-1">
             PermitJockey · Today 7:04 AM
           </div>
@@ -243,18 +243,14 @@ export default function LandingPage() {
                   Start Free — 14 Days →
                 </Link>
               </div>
-              <p className="text-stone-400 text-xs">
+              <p className="text-stone-400 text-sm">
                 No credit card · No app to install · Cancel anytime
               </p>
 
               {/* Desktop trade tags */}
-              <div className="hidden lg:flex flex-wrap gap-2 pt-2">
-                {["Electricians", "HVAC", "Plumbers", "General Contractors"].map(t => (
-                  <span key={t} className="text-xs font-medium bg-stone-100 text-stone-500 px-3 py-1 rounded-full">
-                    {t}
-                  </span>
-                ))}
-              </div>
+              <p className="hidden lg:block text-xs text-stone-400">
+                Electricians · HVAC · Plumbers · General Contractors
+              </p>
             </div>
 
             {/* Right — SMS mockup (shown inline on mobile, right column on desktop) */}
@@ -299,7 +295,7 @@ export default function LandingPage() {
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3 p-5 bg-white rounded-xl border border-stone-200 shadow-sm">
                 <span className="text-2xl flex-shrink-0">{item.emoji}</span>
-                <p className="text-sm font-medium text-stone-800 leading-relaxed">{item.text}</p>
+                <p className="text-base font-medium text-stone-800 leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -344,7 +340,7 @@ export default function LandingPage() {
                       {s.tag}
                     </span>
                   </div>
-                  <p className="text-stone-500 text-sm leading-relaxed">{s.desc}</p>
+                  <p className="text-stone-500 text-base leading-relaxed">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -374,7 +370,7 @@ export default function LandingPage() {
                   "30 / 7 / 1 day expiration warnings",
                   "One-tap status updates from SMS",
                 ].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-stone-700">
+                  <li key={f} className="flex items-center gap-2 text-base text-stone-700">
                     <span className="text-green-500 font-bold">✓</span>
                     {f}
                   </li>
@@ -418,23 +414,32 @@ export default function LandingPage() {
               >
                 Start Free Trial →
               </Link>
-              <p className="text-stone-600 text-xs">14 days free · No credit card required</p>
+              <p className="text-stone-500 text-sm">14 days free · No credit card required</p>
             </div>
 
             {/* Right — features */}
             <div className="mt-10 lg:mt-0">
               <ul className="space-y-4">
-                {[
-                  { icon: "📋", text: "Unlimited permits & jobs" },
-                  { icon: "📱", text: "SMS + email reminders — no per-message fees" },
-                  { icon: "🔗", text: "No-login action links from every reminder" },
-                  { icon: "⚡", text: "Nightly deadline check, 7am reminder delivery" },
-                  { icon: "📊", text: "CSV export of all open permits" },
-                  { icon: "✕", text: "Cancel anytime, no contracts" },
-                ].map((f, i) => (
+                {(
+                  [
+                    { icon: "📋", text: "Unlimited permits & jobs" },
+                    { icon: "📱", text: "SMS + email reminders — no per-message fees" },
+                    { icon: "🔗", text: "No-login action links from every reminder" },
+                    { icon: "⚡", text: "Nightly deadline check, 7am reminder delivery" },
+                    { icon: "📊", text: "CSV export of all open permits" },
+                    {
+                      icon: (
+                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold leading-none flex-shrink-0">
+                          ✕
+                        </span>
+                      ),
+                      text: "Cancel anytime, no contracts",
+                    },
+                  ] as { icon: React.ReactNode; text: string }[]
+                ).map((f, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <span className="text-lg">{f.icon}</span>
-                    <span className="text-stone-300 text-sm">{f.text}</span>
+                    <span className="text-lg leading-none flex-shrink-0">{f.icon}</span>
+                    <span className="text-stone-300 text-base">{f.text}</span>
                   </li>
                 ))}
               </ul>
