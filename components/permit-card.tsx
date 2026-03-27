@@ -133,7 +133,7 @@ export default function PermitCard({ permit, onUpdate }: Props) {
               {address}
             </h3>
           </div>
-          <p className="text-sm text-gray-600 mt-0.5">
+          <p className="text-base text-gray-600 mt-0.5">
             {localPermit.trade_type.charAt(0).toUpperCase() +
               localPermit.trade_type.slice(1)}{" "}
             · #{localPermit.permit_number}
@@ -149,11 +149,11 @@ export default function PermitCard({ permit, onUpdate }: Props) {
       </div>
 
       {/* Status */}
-      <p className="text-sm text-gray-700">{statusDesc}</p>
+      <p className="text-base text-gray-700">{statusDesc}</p>
 
       {/* Expiration date */}
       {localPermit.status !== "closed" && (
-        <p className="text-xs text-gray-500">
+        <p className="text-sm text-gray-500">
           Expires {formatDate(localPermit.expiration_date)}
         </p>
       )}
@@ -163,7 +163,7 @@ export default function PermitCard({ permit, onUpdate }: Props) {
         <button
           onClick={handleAction}
           disabled={loading}
-          className="w-full bg-white border-2 border-current font-semibold py-3 px-4 rounded-lg text-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+          className="w-full bg-white border-2 border-current font-semibold py-3 px-4 rounded-lg text-base transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
             text-blue-700 border-blue-400 hover:bg-blue-50"
         >
           {loading ? "Updating..." : actionLabel}

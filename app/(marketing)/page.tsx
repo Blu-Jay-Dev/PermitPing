@@ -299,7 +299,7 @@ export default function LandingPage() {
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3 p-5 bg-white rounded-xl border border-stone-200 shadow-sm">
                 <span className="text-2xl flex-shrink-0">{item.emoji}</span>
-                <p className="text-sm font-medium text-stone-800 leading-relaxed">{item.text}</p>
+                <p className="text-base font-medium text-stone-800 leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -344,7 +344,7 @@ export default function LandingPage() {
                       {s.tag}
                     </span>
                   </div>
-                  <p className="text-stone-500 text-sm leading-relaxed">{s.desc}</p>
+                  <p className="text-stone-500 text-base leading-relaxed">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -374,7 +374,7 @@ export default function LandingPage() {
                   "30 / 7 / 1 day expiration warnings",
                   "One-tap status updates from SMS",
                 ].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-stone-700">
+                  <li key={f} className="flex items-center gap-2 text-base text-stone-700">
                     <span className="text-green-500 font-bold">✓</span>
                     {f}
                   </li>
@@ -430,11 +430,11 @@ export default function LandingPage() {
                   { icon: "🔗", text: "No-login action links from every reminder" },
                   { icon: "⚡", text: "Nightly deadline check, 7am reminder delivery" },
                   { icon: "📊", text: "CSV export of all open permits" },
-                  { icon: "✕", text: "Cancel anytime, no contracts" },
+                  { icon: "❌", text: "Cancel anytime, no contracts" },
                 ].map((f, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <span className="text-lg">{f.icon}</span>
-                    <span className="text-stone-300 text-sm">{f.text}</span>
+                    <span className="text-stone-300 text-base">{f.text}</span>
                   </li>
                 ))}
               </ul>

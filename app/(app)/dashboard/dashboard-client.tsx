@@ -53,7 +53,7 @@ export default function DashboardClient({ permits }: Props) {
         <div className="text-center space-y-2 pt-4">
           <div className="text-4xl">📋</div>
           <h2 className="text-xl font-bold text-gray-900">No permits yet</h2>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-base">
             Add your open permits and we&apos;ll remind you before key dates.
           </p>
           <Link
@@ -76,13 +76,13 @@ export default function DashboardClient({ permits }: Props) {
                   <span className="text-sm">🔴</span>
                   <h3 className="font-bold text-gray-900 text-base">123 Oak Ave</h3>
                 </div>
-                <p className="text-sm text-gray-600 mt-0.5">Electrical · #E-2411-24</p>
+                <p className="text-base text-gray-600 mt-0.5">Electrical · #E-2411-24</p>
               </div>
               <span className="text-blue-600 text-xl">›</span>
             </div>
-            <p className="text-sm text-gray-700">Rough-in not called — 8 days since issued</p>
-            <p className="text-xs text-gray-500">Expires Jun 14, 2025</p>
-            <div className="w-full bg-white border-2 border-blue-400 text-blue-700 font-semibold py-3 px-4 rounded-lg text-sm text-center">
+            <p className="text-base text-gray-700">Rough-in not called — 8 days since issued</p>
+            <p className="text-sm text-gray-500">Expires Jun 14, 2025</p>
+            <div className="w-full bg-white border-2 border-blue-400 text-blue-700 font-semibold py-3 px-4 rounded-lg text-base text-center">
               Mark Rough-In Called ✓
             </div>
           </div>
@@ -100,7 +100,7 @@ export default function DashboardClient({ permits }: Props) {
             <button
               key={tab.key}
               onClick={() => setFilter(tab.key)}
-              className={`py-3 px-4 text-sm font-medium border-b-2 transition-colors ${
+              className={`py-3 px-4 text-base font-medium border-b-2 transition-colors ${
                 filter === tab.key
                   ? "border-blue-600 text-blue-600"
                   : "border-transparent text-gray-500 hover:text-gray-700"
