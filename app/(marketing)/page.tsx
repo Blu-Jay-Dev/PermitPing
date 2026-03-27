@@ -248,13 +248,9 @@ export default function LandingPage() {
               </p>
 
               {/* Desktop trade tags */}
-              <div className="hidden lg:flex flex-wrap gap-2 pt-2">
-                {["Electricians", "HVAC", "Plumbers", "General Contractors"].map(t => (
-                  <span key={t} className="text-xs font-medium bg-stone-100 text-stone-500 px-3 py-1 rounded-full">
-                    {t}
-                  </span>
-                ))}
-              </div>
+              <p className="hidden lg:block text-xs text-stone-400">
+                Electricians · HVAC · Plumbers · General Contractors
+              </p>
             </div>
 
             {/* Right — SMS mockup (shown inline on mobile, right column on desktop) */}
