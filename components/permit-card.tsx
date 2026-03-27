@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
+import { useToast } from "@/components/ui/toast"
 import {
   getPermitUrgency,
   URGENCY_COLORS,
@@ -77,6 +78,7 @@ function getStatusDescription(permit: Permit): string {
 export default function PermitCard({ permit, onUpdate }: Props) {
   const [localPermit, setLocalPermit] = useState(permit)
   const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
 
   const urgency = getPermitUrgency(localPermit)
   const actionLabel = getActionLabel(localPermit)
@@ -105,10 +107,12 @@ export default function PermitCard({ permit, onUpdate }: Props) {
       if (data) {
         setLocalPermit({ ...data, job: localPermit.job })
         onUpdate?.(data)
+        toast("Updated ✓", "success")
       }
     } catch {
       // Revert on failure
       setLocalPermit(permit)
+      toast("Update failed — check your connection", "error")
     } finally {
       setLoading(false)
     }

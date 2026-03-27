@@ -48,18 +48,45 @@ export default function DashboardClient({ permits }: Props) {
 
   if (permits.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
-        <div className="text-5xl mb-4">📋</div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">No permits yet</h2>
-        <p className="text-gray-600 mb-6">
-          Add your open permits and we&apos;ll remind you before key dates.
-        </p>
-        <Link
-          href="/permits/new"
-          className="bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors text-lg"
-        >
-          Add Your First Permit →
-        </Link>
+      <div className="px-4 pt-6 pb-4 space-y-6 max-w-md mx-auto">
+        {/* CTA */}
+        <div className="text-center space-y-2 pt-4">
+          <div className="text-4xl">📋</div>
+          <h2 className="text-xl font-bold text-gray-900">No permits yet</h2>
+          <p className="text-gray-500 text-sm">
+            Add your open permits and we&apos;ll remind you before key dates.
+          </p>
+          <Link
+            href="/permits/new"
+            className="inline-block bg-blue-600 text-white font-bold py-4 px-8 rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors text-base mt-2"
+          >
+            Add Your First Permit →
+          </Link>
+        </div>
+
+        {/* Sample permit card — shows what they'll see */}
+        <div>
+          <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-3 text-center">
+            Here&apos;s what your board will look like
+          </p>
+          <div className="rounded-xl border-2 border-red-400 bg-red-50 p-4 space-y-3 opacity-60 pointer-events-none select-none">
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm">🔴</span>
+                  <h3 className="font-bold text-gray-900 text-base">123 Oak Ave</h3>
+                </div>
+                <p className="text-sm text-gray-600 mt-0.5">Electrical · #E-2411-24</p>
+              </div>
+              <span className="text-blue-600 text-xl">›</span>
+            </div>
+            <p className="text-sm text-gray-700">Rough-in not called — 8 days since issued</p>
+            <p className="text-xs text-gray-500">Expires Jun 14, 2025</p>
+            <div className="w-full bg-white border-2 border-blue-400 text-blue-700 font-semibold py-3 px-4 rounded-lg text-sm text-center">
+              Mark Rough-In Called ✓
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -37,3 +37,32 @@ export async function POST(req: Request) {
 
   return NextResponse.json({ success: true })
 }
+
+// PATCH — update profile from settings/edit
+export async function PATCH(req: Request) {
+  const { userId } = await auth()
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const body = await req.json()
+  const { company_name, phone, trade_type, state } = body
+
+  const supabase = await createServiceClient()
+
+  const { error } = await supabase
+    .from("contractors")
+    .update({
+      company_name: company_name || null,
+      phone: phone || null,
+      trade_type: trade_type || null,
+      state: state || null,
+    })
+    .eq("clerk_user_id", userId)
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+
+  return NextResponse.json({ success: true })
+}
