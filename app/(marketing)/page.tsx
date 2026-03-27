@@ -190,7 +190,7 @@ export default function LandingPage() {
       {/* ── Nav ─────────────────────────────────────────────────────────────── */}
       <header className="bg-[#f8f7f4]/90 backdrop-blur border-b border-stone-200 px-6 py-5 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Logo height={38} />
+          <Logo height={44} />
           <div className="flex items-center gap-6">
             {/* Desktop nav links */}
             <nav className="hidden lg:flex items-center gap-6 text-sm text-stone-500">
