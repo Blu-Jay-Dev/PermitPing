@@ -87,16 +87,16 @@ interface LogoProps {
 
 export function Logo({ white = false, className = "", height = 32 }: LogoProps) {
   const fg = white ? "white" : "#1c1917"
-  // Horse content in the 900×480 viewBox renders to ~105×62 px at scale 0.14.
-  // The amber badge (x 2–130, y 4–64) wraps it with a squircle corner radius
-  // of ~22% of height — matching the iOS icon ratio.
-  const markScale = 0.14
-  const markX = 5
-  const markY = 0
+  // At scale 0.11 the horse content renders to ~82×44 px.
+  // markX=3, markY=7 centres it inside the badge with ~10 px padding each side.
+  // Badge: x4 y3 104×62 rx14 (rx/h ≈ 22 % — iOS squircle ratio).
+  const markScale = 0.11
+  const markX = 3
+  const markY = 7
 
   return (
     <svg
-      viewBox="0 0 400 68"
+      viewBox="0 0 390 68"
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -104,17 +104,17 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
       className={className}
       style={{ display: "block", overflow: "visible" }}
     >
-      {/* Amber squircle badge behind the horse mark */}
-      <rect x="2" y="4" width="128" height="60" rx="14" fill="#f59e0b" />
+      {/* Amber squircle badge */}
+      <rect x="4" y="3" width="104" height="62" rx="14" fill="#f59e0b" />
 
-      {/* Jockey illustration — white on amber */}
+      {/* Jockey illustration — black on amber */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
-        <path d={HORSE_BODY} fill="white" />
+        <path d={HORSE_BODY} fill="#1c1917" />
       </g>
 
       {/* Wordmark */}
       <text
-        x="144"
+        x="122"
         y="49"
         fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
         fontSize="36"
@@ -155,9 +155,9 @@ export function LogoIcon({ size = 40, className = "" }: LogoIconProps) {
       {/* Amber squircle background — rx=115 is 22.5% of 512, matching iOS icon ratio */}
       <rect x="0" y="0" width="512" height="512" rx="115" fill="#f59e0b" />
 
-      {/* Jockey illustration — white on amber for maximum contrast */}
+      {/* Jockey illustration — black on amber for maximum contrast */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
-        <path d={HORSE_BODY} fill="white" />
+        <path d={HORSE_BODY} fill="#1c1917" />
       </g>
     </svg>
   )
