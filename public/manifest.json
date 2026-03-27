@@ -4,8 +4,8 @@
   "description": "Track open permits and get SMS reminders before inspection windows close.",
   "start_url": "/dashboard",
   "display": "standalone",
-  "background_color": "#f9fafb",
-  "theme_color": "#2563eb",
+  "background_color": "#f8f7f4",
+  "theme_color": "#fbbf24",
   "orientation": "portrait",
   "icons": [
     {
