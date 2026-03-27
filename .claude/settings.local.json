@@ -18,7 +18,13 @@
       "Bash(find C:UsersjacobDocumentsPermitPing -type f -name *.sql -o -name *schema* -o -name *database*)",
       "Bash(ls -la \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)\")",
       "Bash(ls -la \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)/permits\")",
-      "Bash(find \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)/permits\" -type f)"
+      "Bash(find \"C:\\\\Users\\\\jacob\\\\Documents\\\\PermitPing/app/\\(app\\)/permits\" -type f)",
+      "Bash(npm install:*)",
+      "Bash(node -e \"const p = require\\(''./package.json''\\); console.log\\(''@clerk/nextjs:'', p.dependencies[''@clerk/nextjs'']\\)\")",
+      "Bash(node -e \"const lock = require\\(''./package-lock.json''\\); const clerk = lock.packages[''node_modules/@clerk/nextjs'']; console.log\\(''installed version:'', clerk?.version\\)\")",
+      "Bash(find C:/Users/jacob/Documents/PermitPing/app -path *sign-in* -o -path *sign-up*)",
+      "Bash(mkdir -p \"C:/Users/jacob/Documents/PermitPing/app/\\(auth\\)/sign-in/[[...rest]]\")",
+      "Bash(mkdir -p \"C:/Users/jacob/Documents/PermitPing/app/\\(auth\\)/sign-up/[[...rest]]\")"
     ]
   }
 }
