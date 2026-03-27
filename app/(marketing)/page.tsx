@@ -69,7 +69,7 @@ function SmsThread() {
   }, [])
 
   return (
-    <div ref={ref} className="bg-stone-900 rounded-3xl p-3 shadow-2xl w-full max-w-xs mx-auto lg:mx-0 lg:max-w-sm">
+    <div ref={ref} className="bg-stone-900 rounded-3xl p-4 shadow-2xl w-full max-w-sm mx-auto lg:max-w-none">
       <div className="bg-stone-800 rounded-2xl overflow-hidden">
         <div className="flex justify-between items-center px-4 py-2 text-stone-500 text-[10px]">
           <span>9:41</span>
@@ -79,7 +79,7 @@ function SmsThread() {
             <div className="w-3 h-1.5 bg-stone-500 rounded-sm" />
           </div>
         </div>
-        <div className="px-3 pb-5 space-y-2 min-h-[200px]">
+        <div className="px-4 pb-8 space-y-3 min-h-[260px]">
           <div className="text-center text-stone-500 text-[10px] py-1">
             PermitJockey · Today 7:04 AM
           </div>
