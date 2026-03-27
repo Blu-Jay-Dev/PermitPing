@@ -87,17 +87,17 @@ interface LogoProps {
 
 export function Logo({ white = false, className = "", height = 32 }: LogoProps) {
   const fg = white ? "white" : "#1c1917"
-  const amber = "#f59e0b"
   // Mark: source paths live in viewBox 200 100 900 480.
-  // Scale to fit 57×30 area at left of wordmark.
-  // transform: shift origin to (200,100) then scale 900→57 ⟹ scale=0.0633
-  const markScale = 0.0633
-  const markX = 2   // left margin
-  const markY = 19  // vertical centre in 68px tall canvas
+  // At scale=0.19 the horse spans ~76px tall and ~145px wide.
+  // markY=-13 centres the 76px figure in the 68px-tall canvas.
+  // markX=5 leaves a small left margin.
+  const markScale = 0.19
+  const markX = 5
+  const markY = -13
 
   return (
     <svg
-      viewBox="0 0 310 68"
+      viewBox="0 0 440 68"
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -105,17 +105,14 @@ export function Logo({ white = false, className = "", height = 32 }: LogoProps) 
       className={className}
       style={{ display: "block" }}
     >
-      {/* Jockey illustration mark */}
+      {/* Jockey illustration mark — black (matches wordmark colour) */}
       <g transform={`translate(${markX},${markY}) scale(${markScale}) translate(-200,-100)`}>
-        <path d={HORSE_BODY} fill={amber} />
-        {HIGHLIGHTS.map((h, i) => (
-          <path key={i} d={h} fill={white ? "white" : "rgba(255,255,255,0.9)"} />
-        ))}
+        <path d={HORSE_BODY} fill={fg} />
       </g>
 
       {/* Wordmark */}
       <text
-        x="62"
+        x="175"
         y="49"
         fontFamily="Inter, 'Helvetica Neue', Arial, sans-serif"
         fontSize="36"
