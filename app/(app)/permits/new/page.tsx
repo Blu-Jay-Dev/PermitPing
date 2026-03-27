@@ -1,10 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
+import { useRouter, useSearchParams } from "next/navigation"
 import { calculateExpirationDate } from "@/lib/utils"
-import type { Job } from "@/lib/supabase/types"
+import { useToast } from "@/components/ui/toast"
 
 const TRADE_OPTIONS = [
   { value: "electrical", label: "Electrical", emoji: "⚡" },
@@ -14,12 +13,20 @@ const TRADE_OPTIONS = [
   { value: "other", label: "Other", emoji: "📋" },
 ]
 
+interface Job {
+  id: string
+  name: string
+  address: string | null
+  client_name: string | null
+}
+
 export default function NewPermitPage() {
   const router = useRouter()
-  const supabase = createClient()
+  const searchParams = useSearchParams()
+  const { toast } = useToast()
 
   const [jobs, setJobs] = useState<Job[]>([])
-  const [jobId, setJobId] = useState("")
+  const [jobId, setJobId] = useState(searchParams.get("job_id") ?? "")
   const [createNewJob, setCreateNewJob] = useState(false)
   const [newJobAddress, setNewJobAddress] = useState("")
 
@@ -37,15 +44,10 @@ export default function NewPermitPage() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    async function loadJobs() {
-      const { data } = await supabase
-        .from("jobs")
-        .select("*")
-        .eq("is_archived", false)
-        .order("created_at", { ascending: false })
-      setJobs(data ?? [])
-    }
-    loadJobs()
+    fetch("/api/jobs")
+      .then((r) => r.json())
+      .then((data) => setJobs(data.jobs ?? []))
+      .catch(() => {})
   }, [])
 
   // Auto-calculate expiration when trade or issued date changes
@@ -78,51 +80,27 @@ export default function NewPermitPage() {
     setLoading(true)
 
     try {
-      // Get contractor ID
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) throw new Error("Not authenticated")
-
-      // We need contractor_id — fetch it
-      const { data: contractor } = await supabase
-        .from("contractors")
-        .select("id")
-        .single()
-
-      if (!contractor) throw new Error("Contractor profile not found")
-
-      let resolvedJobId = jobId
-
-      // Create new job if needed
-      if (createNewJob) {
-        const { data: newJob, error: jobError } = await supabase
-          .from("jobs")
-          .insert({
-            contractor_id: contractor.id,
-            name: newJobAddress,
-            address: newJobAddress,
-          })
-          .select()
-          .single()
-
-        if (jobError) throw jobError
-        resolvedJobId = newJob.id
-      }
-
-      // Create permit
-      const { error: permitError } = await supabase.from("permits").insert({
-        job_id: resolvedJobId,
-        contractor_id: contractor.id,
-        permit_number: permitNumber,
-        trade_type: tradeType as "electrical" | "hvac" | "plumbing" | "building" | "other",
-        issued_date: issuedDate,
-        expiration_date: expirationDate,
-        rough_in_required: roughInRequired,
-        notes: notes || null,
-        status: "open",
+      const res = await fetch("/api/permits", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          job_id: createNewJob ? undefined : jobId,
+          new_job_address: createNewJob ? newJobAddress : undefined,
+          permit_number: permitNumber,
+          trade_type: tradeType,
+          issued_date: issuedDate,
+          expiration_date: expirationDate,
+          rough_in_required: roughInRequired,
+          notes: notes || null,
+        }),
       })
 
-      if (permitError) throw permitError
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error ?? "Failed to add permit")
+      }
 
+      toast("Permit added! Reminders are set.", "success")
       router.push("/dashboard")
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to add permit")
