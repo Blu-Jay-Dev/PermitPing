@@ -41,7 +41,7 @@ export default async function AppLayout({
   const isTrialing = contractor?.subscription_status === "trialing"
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-stone-50 flex flex-col">
       {/* Past due banner — shows but doesn't block */}
       {isPastDue && (
         <div className="bg-red-600 text-white text-sm text-center px-4 py-2 font-medium">

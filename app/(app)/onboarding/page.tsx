@@ -66,38 +66,43 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white p-6">
-      <div className="max-w-md mx-auto space-y-8">
-        <div className="space-y-3">
+    <div className="min-h-screen bg-stone-50">
+      <div className="max-w-md mx-auto px-5 py-8 space-y-8">
+
+        {/* Header */}
+        <div className="flex flex-col gap-3">
           <Logo height={28} />
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Welcome aboard</h1>
-            <p className="text-gray-600 mt-1">
-              Let&apos;s set up your account so we can send the right reminders.
+            <h1 className="text-2xl font-bold text-stone-900 leading-tight">
+              Welcome aboard
+            </h1>
+            <p className="text-stone-500 mt-1 text-base">
+              Set up your account so we can send the right reminders.
             </p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-7">
+
           {/* Trade type */}
           <div className="space-y-3">
-            <label className="block font-semibold text-gray-900">
-              What&apos;s your trade?
-            </label>
-            <div className="grid grid-cols-2 gap-2">
+            <p className="text-xs font-bold text-stone-400 tracking-widest uppercase">
+              Your Trade
+            </p>
+            <div className="grid grid-cols-2 gap-2.5">
               {TRADES.map((t) => (
                 <button
                   key={t.value}
                   type="button"
                   onClick={() => setTrade(t.value)}
-                  className={`p-4 rounded-xl border-2 text-left transition-colors ${
+                  className={`p-4 rounded-2xl border-2 text-left transition-all ${
                     trade === t.value
-                      ? "border-blue-600 bg-blue-50"
-                      : "border-gray-200 bg-white hover:border-gray-300"
+                      ? "border-amber-400 bg-amber-50 shadow-sm"
+                      : "border-stone-200 bg-white hover:border-stone-300 shadow-sm"
                   }`}
                 >
                   <div className="text-2xl">{t.emoji}</div>
-                  <div className="font-medium text-gray-900 mt-1">
+                  <div className={`font-semibold mt-1.5 text-sm ${trade === t.value ? "text-stone-900" : "text-stone-700"}`}>
                     {t.label}
                   </div>
                 </button>
@@ -106,62 +111,61 @@ export default function OnboardingPage() {
           </div>
 
           {/* State */}
-          <div className="space-y-2">
-            <label className="block font-semibold text-gray-900" htmlFor="state">
-              What state do you work in?
-            </label>
+          <div className="space-y-3">
+            <p className="text-xs font-bold text-stone-400 tracking-widest uppercase">
+              State You Work In
+            </p>
             <select
               id="state"
               value={state}
               onChange={(e) => setState(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-4 text-gray-900 text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-stone-900 text-base focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent shadow-sm"
             >
-              <option value="">Select state...</option>
+              <option value="">Select state…</option>
               {US_STATES.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
+                <option key={s} value={s}>{s}</option>
               ))}
             </select>
           </div>
 
           {/* Company name */}
-          <div className="space-y-2">
-            <label className="block font-semibold text-gray-900" htmlFor="company">
-              Company name{" "}
-              <span className="font-normal text-gray-500">(optional)</span>
-            </label>
+          <div className="space-y-3">
+            <p className="text-xs font-bold text-stone-400 tracking-widest uppercase">
+              Company Name{" "}
+              <span className="normal-case font-normal text-stone-400">(optional)</span>
+            </p>
             <input
               id="company"
               type="text"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Smith Electric LLC"
-              className="w-full border border-gray-300 rounded-xl p-4 text-gray-900 text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-stone-900 text-base focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent shadow-sm"
             />
           </div>
 
           {/* Phone */}
-          <div className="space-y-2">
-            <label className="block font-semibold text-gray-900" htmlFor="phone">
-              Phone for SMS reminders{" "}
-              <span className="font-normal text-gray-500">(recommended)</span>
-            </label>
+          <div className="space-y-3">
+            <p className="text-xs font-bold text-stone-400 tracking-widest uppercase">
+              Phone for SMS Reminders{" "}
+              <span className="normal-case font-normal text-stone-400">(recommended)</span>
+            </p>
             <input
               id="phone"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+1 (555) 555-5555"
-              className="w-full border border-gray-300 rounded-xl p-4 text-gray-900 text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-stone-900 text-base focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent shadow-sm"
             />
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-stone-500 flex items-center gap-1.5">
+              <span>📱</span>
               SMS is the most reliable way to get reminded on the job site.
             </p>
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-sm">
               {error}
             </div>
           )}
@@ -169,10 +173,11 @@ export default function OnboardingPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-semibold py-4 px-6 rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+            className="w-full bg-amber-400 hover:bg-amber-500 active:bg-amber-600 text-stone-900 font-bold py-4 px-6 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg shadow-sm"
           >
-            {loading ? "Setting up..." : "Set Up My Account →"}
+            {loading ? "Setting up…" : "Set Up My Account →"}
           </button>
+
         </form>
       </div>
     </div>

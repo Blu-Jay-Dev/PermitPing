@@ -24,7 +24,10 @@
       "Bash(node -e \"const lock = require\\(''./package-lock.json''\\); const clerk = lock.packages[''node_modules/@clerk/nextjs'']; console.log\\(''installed version:'', clerk?.version\\)\")",
       "Bash(find C:/Users/jacob/Documents/PermitPing/app -path *sign-in* -o -path *sign-up*)",
       "Bash(mkdir -p \"C:/Users/jacob/Documents/PermitPing/app/\\(auth\\)/sign-in/[[...rest]]\")",
-      "Bash(mkdir -p \"C:/Users/jacob/Documents/PermitPing/app/\\(auth\\)/sign-up/[[...rest]]\")"
+      "Bash(mkdir -p \"C:/Users/jacob/Documents/PermitPing/app/\\(auth\\)/sign-up/[[...rest]]\")",
+      "Bash(xargs cat:*)",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\(''C:/Users/jacob/Documents/PermitPing/public/icon-192.png''\\); img.save\\(''C:/Users/jacob/Documents/PermitPing/app/favicon.ico'', format=''ICO'', sizes=[\\(16,16\\),\\(32,32\\),\\(48,48\\)]\\)\")",
+      "Bash(find \"C:/Users/jacob/Documents/PermitPing/app/\\(app\\)\" -name \"*.tsx\")"
     ]
   }
 }

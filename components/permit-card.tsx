@@ -122,18 +122,18 @@ export default function PermitCard({ permit, onUpdate }: Props) {
 
   return (
     <div
-      className={`rounded-xl border-2 p-4 space-y-3 ${URGENCY_COLORS[urgency]}`}
+      className={`rounded-2xl border-2 p-4 space-y-3 shadow-sm ${URGENCY_COLORS[urgency]}`}
     >
       {/* Header row */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="text-sm">{URGENCY_DOTS[urgency]}</span>
-            <h3 className="font-bold text-gray-900 truncate text-base">
+            <h3 className="font-bold text-stone-900 truncate text-base">
               {address}
             </h3>
           </div>
-          <p className="text-base text-gray-600 mt-0.5">
+          <p className="text-base text-stone-500 mt-0.5">
             {localPermit.trade_type.charAt(0).toUpperCase() +
               localPermit.trade_type.slice(1)}{" "}
             · #{localPermit.permit_number}
@@ -141,7 +141,7 @@ export default function PermitCard({ permit, onUpdate }: Props) {
         </div>
         <Link
           href={`/permits/${localPermit.id}`}
-          className="text-blue-600 text-xl flex-shrink-0 p-1"
+          className="text-stone-400 hover:text-stone-600 text-2xl flex-shrink-0 p-1 leading-none"
           aria-label="View permit details"
         >
           ›
@@ -149,11 +149,11 @@ export default function PermitCard({ permit, onUpdate }: Props) {
       </div>
 
       {/* Status */}
-      <p className="text-base text-gray-700">{statusDesc}</p>
+      <p className="text-base text-stone-700">{statusDesc}</p>
 
       {/* Expiration date */}
       {localPermit.status !== "closed" && (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-stone-400">
           Expires {formatDate(localPermit.expiration_date)}
         </p>
       )}
@@ -163,10 +163,9 @@ export default function PermitCard({ permit, onUpdate }: Props) {
         <button
           onClick={handleAction}
           disabled={loading}
-          className="w-full bg-white border-2 border-current font-semibold py-3 px-4 rounded-lg text-base transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
-            text-blue-700 border-blue-400 hover:bg-blue-50"
+          className="w-full bg-amber-400 hover:bg-amber-500 active:bg-amber-600 text-stone-900 font-bold py-3 px-4 rounded-xl text-base transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? "Updating..." : actionLabel}
+          {loading ? "Updating…" : actionLabel}
         </button>
       )}
     </div>

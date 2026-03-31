@@ -31,13 +31,13 @@ export default async function SettingsPage() {
     : 0
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-stone-50">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3">
-        <h1 className="font-bold text-lg text-gray-900">Settings</h1>
+      <header className="sticky top-0 z-40 bg-white border-b border-stone-100 px-4 py-3">
+        <h1 className="font-bold text-lg text-stone-900">Settings</h1>
       </header>
 
-      <div className="p-4 space-y-4 max-w-md mx-auto">
+      <div className="p-4 space-y-3 max-w-md mx-auto">
         {/* Trial banner */}
         {contractor.subscription_status === "trialing" && daysLeft > 0 && (
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-base text-blue-800">
@@ -46,8 +46,8 @@ export default async function SettingsPage() {
         )}
 
         {/* Profile */}
-        <section className="bg-white rounded-xl p-4 space-y-3">
-          <h2 className="font-semibold text-gray-900 text-base">Profile</h2>
+        <section className="bg-white rounded-2xl p-4 space-y-3 shadow-sm border border-stone-100">
+          <h2 className="text-xs font-bold text-stone-400 tracking-widest uppercase">Profile</h2>
           <div className="flex items-center gap-3">
             <UserButtonWrapper />
             <div className="text-base text-gray-600">
@@ -74,8 +74,8 @@ export default async function SettingsPage() {
         </section>
 
         {/* Notifications */}
-        <section className="bg-white rounded-xl p-4 space-y-3">
-          <h2 className="font-semibold text-gray-900 text-base">Notifications</h2>
+        <section className="bg-white rounded-2xl p-4 space-y-3 shadow-sm border border-stone-100">
+          <h2 className="text-xs font-bold text-stone-400 tracking-widest uppercase">Notifications</h2>
           <div className="space-y-2 text-base text-gray-700">
             <div className="flex items-center gap-2">
               <span className="text-green-500">✓</span>
@@ -104,8 +104,8 @@ export default async function SettingsPage() {
         </section>
 
         {/* Billing */}
-        <section className="bg-white rounded-xl p-4 space-y-3">
-          <h2 className="font-semibold text-gray-900 text-base">Billing</h2>
+        <section className="bg-white rounded-2xl p-4 space-y-3 shadow-sm border border-stone-100">
+          <h2 className="text-xs font-bold text-stone-400 tracking-widest uppercase">Billing</h2>
           <div className="text-base text-gray-700">
             <p className="font-medium">
               PermitJockey —{" "}
@@ -119,7 +119,7 @@ export default async function SettingsPage() {
           {contractor.subscription_status === "trialing" && (
             <a
               href="/api/checkout"
-              className="inline-block w-full text-center bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-blue-700 transition-colors text-base"
+              className="inline-block w-full text-center bg-amber-400 hover:bg-amber-500 active:bg-amber-600 text-stone-900 font-bold py-3 px-4 rounded-xl transition-colors text-base shadow-sm"
             >
               Upgrade to Pro — $39/month
             </a>

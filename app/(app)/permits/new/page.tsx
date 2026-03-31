@@ -110,28 +110,28 @@ export default function NewPermitPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-stone-50">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-100 px-4 py-3 flex items-center gap-3">
+      <header className="sticky top-0 z-40 bg-white border-b border-stone-100 px-4 py-3 flex items-center gap-3">
         <button
           onClick={() => router.back()}
-          className="text-blue-600 font-medium text-sm"
+          className="text-stone-500 hover:text-stone-700 font-medium text-sm"
         >
           ← Back
         </button>
-        <h1 className="font-bold text-lg text-gray-900">Add Permit</h1>
+        <h1 className="font-bold text-lg text-stone-900">Add Permit</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="p-4 space-y-6 max-w-md mx-auto">
         {/* Job selection */}
         <div className="space-y-3">
-          <label className="block font-semibold text-gray-900">Job</label>
+          <p className="text-xs font-bold text-stone-400 tracking-widest uppercase">Job Site</p>
 
           {!createNewJob && jobs.length > 0 && (
             <select
               value={jobId}
               onChange={(e) => setJobId(e.target.value)}
-              className="w-full border border-gray-300 rounded-xl p-4 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-base text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm"
             >
               <option value="">Select a job...</option>
               {jobs.map((j) => (
@@ -148,7 +148,7 @@ export default function NewPermitPage() {
               setCreateNewJob(!createNewJob)
               setJobId("")
             }}
-            className="text-sm text-blue-600 font-medium"
+            className="text-sm text-amber-600 font-semibold"
           >
             {createNewJob ? "← Select existing job" : "+ Create new job"}
           </button>
@@ -159,7 +159,7 @@ export default function NewPermitPage() {
               value={newJobAddress}
               onChange={(e) => setNewJobAddress(e.target.value)}
               placeholder="123 Oak Ave, Anytown FL"
-              className="w-full border border-gray-300 rounded-xl p-4 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-base text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm"
               autoFocus
             />
           )}
@@ -167,7 +167,7 @@ export default function NewPermitPage() {
 
         {/* Permit number */}
         <div className="space-y-2">
-          <label className="block font-semibold text-gray-900" htmlFor="permitNumber">
+          <label className="block text-xs font-bold text-stone-400 tracking-widest uppercase" htmlFor="permitNumber">
             Permit Number <span className="text-red-500">*</span>
           </label>
           <input
@@ -177,14 +177,14 @@ export default function NewPermitPage() {
             value={permitNumber}
             onChange={(e) => setPermitNumber(e.target.value)}
             placeholder="E-2411-24"
-            className="w-full border border-gray-300 rounded-xl p-4 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-base text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm"
             required
           />
         </div>
 
         {/* Trade type */}
         <div className="space-y-3">
-          <label className="block font-semibold text-gray-900">
+          <label className="block text-xs font-bold text-stone-400 tracking-widest uppercase">
             Trade Type <span className="text-red-500">*</span>
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -195,8 +195,8 @@ export default function NewPermitPage() {
                 onClick={() => setTradeType(t.value)}
                 className={`p-3 rounded-xl border-2 text-center transition-colors ${
                   tradeType === t.value
-                    ? "border-blue-600 bg-blue-50"
-                    : "border-gray-200 bg-white hover:border-gray-300"
+                    ? "border-amber-400 bg-amber-50"
+                    : "border-stone-200 bg-white hover:border-stone-300"
                 }`}
               >
                 <div className="text-xl">{t.emoji}</div>
@@ -210,7 +210,7 @@ export default function NewPermitPage() {
 
         {/* Issued date */}
         <div className="space-y-2">
-          <label className="block font-semibold text-gray-900" htmlFor="issuedDate">
+          <label className="block text-xs font-bold text-stone-400 tracking-widest uppercase" htmlFor="issuedDate">
             Issued Date <span className="text-red-500">*</span>
           </label>
           <input
@@ -218,14 +218,14 @@ export default function NewPermitPage() {
             type="date"
             value={issuedDate}
             onChange={(e) => setIssuedDate(e.target.value)}
-            className="w-full border border-gray-300 rounded-xl p-4 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-base text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm"
             required
           />
         </div>
 
         {/* Expiration date */}
         <div className="space-y-2">
-          <label className="block font-semibold text-gray-900" htmlFor="expirationDate">
+          <label className="block text-xs font-bold text-stone-400 tracking-widest uppercase" htmlFor="expirationDate">
             Expiration Date <span className="text-red-500">*</span>
             <span className="font-normal text-gray-500 text-sm ml-1">
               (auto-calculated, editable)
@@ -236,7 +236,7 @@ export default function NewPermitPage() {
             type="date"
             value={expirationDate}
             onChange={(e) => setExpirationDate(e.target.value)}
-            className="w-full border border-gray-300 rounded-xl p-4 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full border border-stone-200 bg-white rounded-2xl p-4 text-base text-stone-900 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-sm"
             required
           />
         </div>
@@ -291,9 +291,9 @@ export default function NewPermitPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white font-semibold py-4 px-6 rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+          className="w-full bg-amber-400 hover:bg-amber-500 active:bg-amber-600 text-stone-900 font-bold py-4 px-6 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg shadow-sm"
         >
-          {loading ? "Adding Permit..." : "Add Permit"}
+          {loading ? "Adding Permit…" : "Add Permit"}
         </button>
 
         <p className="text-center text-sm text-gray-500 pb-2">

@@ -50,7 +50,7 @@ export default async function DashboardPage() {
           <Logo height={24} />
           <Link
             href="/permits/new"
-            className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors"
+            className="bg-amber-400 hover:bg-amber-500 active:bg-amber-600 text-stone-900 text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-sm"
           >
             + Add Permit
           </Link>
